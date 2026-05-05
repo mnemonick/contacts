@@ -1,0 +1,46 @@
+{
+  "$schema": "https://nodejs.org/dist/v25.9.0/docs/node-config-schema.json",
+  "nodeOptions": {
+    "watch": true,
+
+    "inspect": true,
+    "inspect-brk": true,
+
+    "permission": true,
+
+    "trace-warnings": true,
+    "trace-deprecation": true,
+    "trace-uncaught": true,
+    "trace-require-module": "all",
+
+    "cpu-prof": true,
+    "cpu-prof-dir": "diagnostics",
+    "cpu-prof-name": "cpu.cpuprofile",
+    "max-old-space-size-percentage": "1",
+
+    "disable-warning": ["ExperimentalWarning"],
+    "redirect-warnings": "diagnostics/warnings.json",
+
+    "report-uncaught-exception": true,
+    "report-on-fatalerror": true,
+    "report-dir": "diagnostics",
+    "report-filename": "report.json",
+
+    "heap-prof": true,
+    "heap-prof-dir": "diagnostics",
+    "heap-prof-name": "heap.heapprofile",
+
+    "throw-deprecation": true,
+    "pending-deprecation": true,
+
+    "experimental-webstorage": false,
+    "experimental-detect-module": false,
+    "experimental-repl-await": false,
+    "experimental-websocket": false,
+    "experimental-sqlite": false,
+
+    "unhandled-rejections": "strict",
+    "frozen-intrinsics": true,
+    "disable-proto": "throw"
+  }
+}

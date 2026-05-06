@@ -9,3 +9,4 @@ let element = document.getElementById('root') as HTMLElement;
 let root = ReactDOM.createRoot(element);
 
 root.render(<App/>);
+

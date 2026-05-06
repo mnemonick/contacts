@@ -10,6 +10,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="scripts" />
-    <orderEntry type="module" module-name="tools" />
+    <orderEntry type="module" module-name="playground" />
   </component>
 </module>

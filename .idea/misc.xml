@@ -3,4 +3,8 @@
   <component name="AhkProjectSettings">
     <option name="defaultAhkSdk" value="AutoHotkey v2.0.23" />
   </component>
+  <component name="ViteConfiguration">
+    <option name="mode" value="DISABLED" />
+    <option name="path" value="$PROJECT_DIR$/frontend/vite.config.js" />
+  </component>
 </project>

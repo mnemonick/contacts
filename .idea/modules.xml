@@ -3,8 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/contacts-manager.iml" filepath="$PROJECT_DIR$/.idea/contacts-manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../life/.idea/life.iml" filepath="$PROJECT_DIR$/../life/.idea/life.iml" />
       <module fileurl="file://$PROJECT_DIR$/../playground/.idea/playground.iml" filepath="$PROJECT_DIR$/../playground/.idea/playground.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../scripts/.idea/scripts.iml" filepath="$PROJECT_DIR$/../scripts/.idea/scripts.iml" />
     </modules>
   </component>
 </project>

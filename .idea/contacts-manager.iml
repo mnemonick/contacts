@@ -6,10 +6,11 @@
       <excludeFolder url="file://$MODULE_DIR$/.idea/dataSources" />
       <excludeFolder url="file://$MODULE_DIR$/.idea/httpRequests" />
       <excludeFolder url="file://$MODULE_DIR$/backend/diagnostics" />
+      <excludeFolder url="file://$MODULE_DIR$/sender/dist" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="scripts" />
     <orderEntry type="module" module-name="playground" />
+    <orderEntry type="module" module-name="life" />
   </component>
 </module>

@@ -1,20 +1,20 @@
 {
-  "jsonSchema": "https://json.schemastore.org/tsconfig",
+  "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "../sender/dist",
     "target": "ESNext",
-    "lib": [],
 
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "jsx": "react-jsx",
-
     "strict": true,
 
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "isolatedModules": true,
 
-    "skipLibCheck": true,
-    "noEmit": true
+    "skipLibCheck": true
   }
 }
+

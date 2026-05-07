@@ -1,24 +1,23 @@
-import {defineConfig} from 'vite';
 import {resolve} from 'node:path';
-import checker from 'vite-plugin-checker';
+import {defineConfig} from 'vite';
+import {fileURLToPath} from 'url';
+import {dirname} from 'path';
+
+let __filename = fileURLToPath(import.meta.url);
+let __dirname = dirname(__filename);
 
 export default defineConfig(args => {
   return {
     root: 'src',
     mode: 'development',
-    plugins: [
-      checker({typescript: true}),
-    ],
-    resolve: {
-
-    },
     build: {
-      outDir: resolve(process.cwd(), '..', 'sender', 'dist'),
+      outDir: resolve(__dirname, '..', 'sender', 'dist'),
       minify: false,
-      emptyOutDir: true,
-      rollupOptions: {
-        external: ['react']
-
+      emptyOutDir: true
+    },
+    resolve: {
+      alias: {
+        '@': resolve(__dirname, 'src')
       }
     }
   }

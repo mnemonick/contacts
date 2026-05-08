@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
     "rootDir": "./src",
-    "outDir": "../sender/dist",
+    "outDir": "../sender/nginx.conf",
     "target": "ESNext",
 
     "module": "ESNext",

@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/contacts-manager.iml" filepath="$PROJECT_DIR$/.idea/contacts-manager.iml" />
       <module fileurl="file://$PROJECT_DIR$/../life/.idea/life.iml" filepath="$PROJECT_DIR$/../life/.idea/life.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../playground/.idea/playground.iml" filepath="$PROJECT_DIR$/../playground/.idea/playground.iml" />
     </modules>
   </component>
 </project>

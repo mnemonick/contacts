@@ -5,7 +5,7 @@ import terser from '@rollup/plugin-terser'
 import replace from '@rollup/plugin-replace'
 
 import {fileURLToPath} from "url";
-import path from "node:path";
+import path from "path";
 
 let __filename = fileURLToPath(import.meta.url);
 let __dirname = path.dirname(__filename);

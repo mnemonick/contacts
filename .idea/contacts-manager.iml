@@ -7,6 +7,8 @@
       <excludeFolder url="file://$MODULE_DIR$/.idea/httpRequests" />
       <excludeFolder url="file://$MODULE_DIR$/backend/diagnostics" />
       <excludeFolder url="file://$MODULE_DIR$/sender/dist" />
+      <excludeFolder url="file://$MODULE_DIR$/frontend/playwright-report" />
+      <excludeFolder url="file://$MODULE_DIR$/frontend/test-results" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

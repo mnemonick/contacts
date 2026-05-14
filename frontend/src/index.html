@@ -17,8 +17,6 @@
     script.type = 'importmap';
     script.textContent = JSON.stringify(importMap);
 
-    // if (import.meta.env) document.head.prepend(script);
-
     if ('%VITE_MODE%' === 'production') {
       console.log('HERE')
     }

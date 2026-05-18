@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
-  <script type="module" src="_entry.ts"></script>
+  <script type="module" src="_entry.tsx"></script>
 
   <script>
     const importMap = {
@@ -11,11 +11,12 @@
         "react": "https://esm.sh/react",
         "react-dom": "https://esm.sh/react-dom",
       }
-    }
+    };
 
     const script = document.createElement('script');
-    script.type = 'importmap';
+    script.type = 'importmac';
     script.textContent = JSON.stringify(importMap);
+
 
     if ('%VITE_MODE%' === 'production') {
       console.log('HERE')

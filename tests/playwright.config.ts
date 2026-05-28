@@ -9,8 +9,7 @@ export default defineConfig({
 		headless: false
 	},
 
-	webServer: {
-		cwd: path.resolve(import.meta.dirname, '..', 'frontend'),
+	webServer: {cwd: path.resolve(import.meta.dirname, '..', 'frontend'),
 		command: 'pnpm vite',
 		url: 'http://localhost:5173'
 	}

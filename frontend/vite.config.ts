@@ -10,7 +10,9 @@ export default defineConfig((args) => {
 	return {
 		root: "./src",
 		envDir: envDir,
-		plugins: [react()],
+		plugins: [
+			react()
+		],
 		build: {
 			outDir: distDir,
 			minify: args.mode === "production",

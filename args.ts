@@ -12,12 +12,7 @@ export default {
   betterstack: {
     dsn: ""
   },
-  sentry: {
-    url: "",
-    org: "",
-    project: "",
-    authToken: ""
-  } as SentryConfig | null,
-  tls: null as TLSConfig | null,
+  sentry: undefined as SentryConfig | undefined,
+  tls: undefined as TLSConfig | undefined,
   mode: "development" as Mode
 };

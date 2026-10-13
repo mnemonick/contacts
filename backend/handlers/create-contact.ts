@@ -6,7 +6,7 @@ import type { Contact } from "%/utils/types.ts";
 export const NAME_MIN = 3;
 
 export default async function (c: Context) {
-  const body: unknown = await c.req.json().catch(() => null);
+  const body: unknown = await c.req.json().catch(() => undefined);
 
   if (!isObject(body)) return c.json({ error: "BODY_INVALID" });
 
@@ -44,4 +44,6 @@ export type CreateContactRequest = {
   comment: string;
 };
 
-export type CreateContactResponse = { error: null; contact: Contact } | { error: string };
+export type CreateContactResponse =
+  | { error: null; contact: Contact }
+  | { error: string };

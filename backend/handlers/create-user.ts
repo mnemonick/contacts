@@ -8,7 +8,7 @@ export const USERNAME_MIN = 4;
 export const PASSWORD_MIN = 6;
 
 export default async function (c: Context) {
-  const body: unknown = await c.req.json().catch(() => null);
+  const body: unknown = await c.req.json().catch(() => undefined);
 
   if (!isObject(body)) return c.json<CreateUserResponse>({ error: "BODY_INVALID" });
 

@@ -174,7 +174,7 @@ export default function () {
     transition: `background ${HOVER}ms linear`
   };
 
-  if (user === null) {
+  if (user === undefined) {
     return <Loader />;
   }
 
@@ -204,8 +204,8 @@ export default function () {
       </route-header>
 
       <route-body style={$routeBody}>
-        {layout.desktop ? <Electrons side="left" width={layout.left} /> : null}
-        {layout.desktop ? <Electrons side="right" width={layout.left} /> : null}
+        {layout.desktop ? <Electrons side="left" width={layout.left} /> : undefined}
+        {layout.desktop ? <Electrons side="right" width={layout.left} /> : undefined}
 
         {user.contacts.length === 0 ? (
           <placeholder style={$placeholder}>{m.placeholder}</placeholder>
@@ -234,9 +234,9 @@ export default function () {
         <Tooltip>{m.createContact}</Tooltip>
       </Button>
 
-      {modal === "CREATE" ? <ContactModal onClose={() => setModal("NONE")} /> : null}
-      {modal === "PROFILE" ? <ProfileModal onClose={() => setModal("NONE")} /> : null}
-      {typeof modal === "object" ? <ContactModal contact={modal} onClose={() => setModal("NONE")} /> : null}
+      {modal === "CREATE" ? <ContactModal onClose={() => setModal("NONE")} /> : undefined}
+      {modal === "PROFILE" ? <ProfileModal onClose={() => setModal("NONE")} /> : undefined}
+      {typeof modal === "object" ? <ContactModal contact={modal} onClose={() => setModal("NONE")} /> : undefined}
     </route>
   );
 
@@ -244,7 +244,7 @@ export default function () {
   function logout() {
     delete localStorage.username;
     delete localStorage.password;
-    setUser(null);
+    setUser(undefined);
     setLocation("/");
   }
 

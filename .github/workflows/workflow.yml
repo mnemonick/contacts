@@ -56,13 +56,10 @@ jobs:
         run: deno task gitleaks
 
       - name: Check types
-        run: deno task --recursive types
+        run: deno task --recursive validate
 
       - name: Lint and check formatting
         run: deno task check
-
-      - name: Check spelling
-        run: deno task cspell
 
       - name: Build frontend
         run: deno task --cwd=frontend build

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/denoland/deno/main/cli/schemas/config-file.v1.json",
+  "$schema": "../config-file.v1.json",
   "tasks": {
     "watch": {
       "description": "Rebuilds the frontend into sender/public on file changes (no dev server: the sender serves it)",
@@ -13,21 +13,6 @@
       "description": "Builds the production frontend into sender/public",
       "command": "vite build --configLoader native --mode=production"
     }
-  },
-  "imports": {
-    "#/": "./",
-    "typescript": "npm:typescript@7.0.2",
-    "@js-temporal/polyfill": "npm:@js-temporal/polyfill@0.5.1",
-    "@sentry/react": "npm:@sentry/react@^11.4.0",
-    "@sentry/vite-plugin": "npm:@sentry/vite-plugin@^5.4.0",
-    "@types/react": "npm:@types/react@19.3.0",
-    "@types/react-dom": "npm:@types/react-dom@19.3.0",
-    "@deno/vite-plugin": "npm:@deno/vite-plugin@2.0.3",
-    "react": "npm:react@19.3.0",
-    "react-dom": "npm:react-dom@19.3.0",
-    "vite": "npm:vite@8.3.0",
-    "wouter": "npm:wouter@3.11.0",
-    "zustand": "npm:zustand@5.0.15"
   },
   "compilerOptions": {
     "jsx": "react-jsx",

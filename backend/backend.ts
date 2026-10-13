@@ -16,8 +16,7 @@ import updateContact from "%/handlers/update-contact.ts";
 import sql from "%/utils/sql.ts";
 import args from "~/args.ts";
 
-// There are no sessions: every request carries username and password, and each handler checks them.
-// The frontend takes AppType from this file for its typed client, so it must stay a type-only import there.
+// All handlers are POST requests with verb in URL instead of method.
 const hono = new Hono()
   .use(cors({ maxAge: 86_400 }))
   .use(logger())
@@ -27,7 +26,14 @@ const hono = new Hono()
   .post("/create-user", createUser)
   .post("/create-contact", createContact)
   .post("/update-contact", updateContact)
-  .post("/remove-contact", removeContact);
+  .post("/remove-contact", removeContact)
+  .notFound((c) => c.json({ error: "NOT_FOUND" }))
+  .onError((err, c) => {
+    console.error(err);
+    Sentry.captureException(err);
+    // The only HTTPException thrown is the timeout; anything else is a bug.
+    return c.json({ error: err instanceof HTTPException ? err.message : "INTERNAL" });
+  });
 
 // Errors are sent to Better Stack only in production.
 Sentry.init({
@@ -42,25 +48,17 @@ await shift({
   before: ({ migration_id, name }) => console.log({ type: "MIGRATING", migration_id, name })
 });
 
-// Every response is 200: errors are reported only in the error field.
-hono.notFound((c) => c.json({ error: "NOT_FOUND" }));
-hono.onError((err, c) => {
-  console.error(err);
-  Sentry.captureException(err);
-  // The only HTTPException thrown is the timeout; anything else is a bug.
-  return c.json({ error: err instanceof HTTPException ? err.message : "INTERNAL" });
-});
-
 // TLS only when args.tls is set (production). Locally the server runs over plain HTTP.
 const tls = args.tls
   ? { cert: Deno.readTextFileSync(args.tls.cert), key: Deno.readTextFileSync(args.tls.key) }
-  : null;
+  : undefined;
 
+// Start listening.
 const server = Deno.serve({
   ...tls,
   port: 2001,
   handler: hono.fetch,
-  onListen: (info) => console.log({ type: "LISTENING", port: info.port, tls: tls !== null })
+  onListen: (info) => console.log({ type: "LISTENING", port: info.port, tls: tls !== undefined })
 });
 
 // Windows supports only SIGINT (Ctrl+C); on the server rc.d stops the process with SIGTERM.
@@ -74,4 +72,5 @@ Deno.addSignalListener(signal, async () => {
   Deno.exit(0);
 });
 
+// Export types for frontend.
 export type AppType = typeof hono;

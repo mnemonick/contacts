@@ -94,8 +94,8 @@ export default function () {
 
       <route-body style={$routeBody}>
         <route-content style={$routeContent}>
-          {layout.desktop ? <Electrons side="left" width={layout.left} /> : null}
-          {layout.desktop ? <Electrons side="right" width={layout.left} /> : null}
+          {layout.desktop ? <Electrons side="left" width={layout.left} /> : undefined}
+          {layout.desktop ? <Electrons side="right" width={layout.left} /> : undefined}
 
           <sections style={$sections}>
             <section style={$section}>
@@ -283,8 +283,8 @@ export default function () {
         <Tooltip>{m.login}</Tooltip>
       </Button>
 
-      {modal === "LOGIN" ? <LoginModal onClose={() => setModal("NONE")} /> : null}
-      {modal === "REGISTER" ? <RegisterModal onClose={() => setModal("NONE")} /> : null}
+      {modal === "LOGIN" ? <LoginModal onClose={() => setModal("NONE")} /> : undefined}
+      {modal === "REGISTER" ? <RegisterModal onClose={() => setModal("NONE")} /> : undefined}
     </route>
   );
 }

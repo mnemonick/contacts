@@ -5,7 +5,7 @@ import { PASSWORD_MIN, USERNAME_MIN } from "%/handlers/create-user.ts";
 import type { User } from "%/utils/types.ts";
 
 export default async function (c: Context) {
-  const body: unknown = await c.req.json().catch(() => null);
+  const body: unknown = await c.req.json().catch(() => undefined);
 
   if (!isObject(body)) return c.json<GetUserResponse>({ error: "BODY_INVALID" });
 
@@ -62,4 +62,6 @@ export type GetUserRequest = {
   password: string;
 };
 
-export type GetUserResponse = { error: null; user: User } | { error: string };
+export type GetUserResponse =
+  | { error: null; user: User }
+  | { error: string };

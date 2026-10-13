@@ -120,9 +120,9 @@ export default function ({ onClose }: Props) {
         )}
       </form>
 
-      {modal === "USERNAME_TAKEN" ? <ErrorModal onClose={() => setModal("NONE")}>{m.usernameTaken}</ErrorModal> : null}
-      {modal === "UNEXPECTED" ? <ErrorModal onClose={() => setModal("NONE")}>{m.unexpected}</ErrorModal> : null}
-      {modal === "LOADER" ? <Loader /> : null}
+      {modal === "USERNAME_TAKEN" ? <ErrorModal onClose={() => setModal("NONE")}>{m.usernameTaken}</ErrorModal> : undefined}
+      {modal === "UNEXPECTED" ? <ErrorModal onClose={() => setModal("NONE")}>{m.unexpected}</ErrorModal> : undefined}
+      {modal === "LOADER" ? <Loader /> : undefined}
     </Modal>
   );
 

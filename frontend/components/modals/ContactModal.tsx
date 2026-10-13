@@ -179,8 +179,8 @@ export default function ({ contact, onClose }: Props) {
         }}
       />
       {footer}
-      {modal === "UNEXPECTED" ? <ErrorModal onClose={() => setModal("NONE")}>{m.unexpected}</ErrorModal> : null}
-      {modal === "LOADER" ? <Loader /> : null}
+      {modal === "UNEXPECTED" ? <ErrorModal onClose={() => setModal("NONE")}>{m.unexpected}</ErrorModal> : undefined}
+      {modal === "LOADER" ? <Loader /> : undefined}
     </Modal>
   );
 

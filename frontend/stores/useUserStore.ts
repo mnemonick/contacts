@@ -2,16 +2,16 @@ import { create } from "zustand";
 import type { Contact, User } from "%/utils/types.ts";
 
 interface UserStore {
-  user: User | null;
-  setUser: (user: User | null) => void;
+  user: User | undefined;
+  setUser: (user: User | undefined) => void;
   addContact: (contact: Contact) => void;
   removeContact: (id: number) => void;
   updateContact: (contact: Contact) => void;
 }
 
 export default create<UserStore>((set) => ({
-  user: null,
-  setUser: (user: User | null) => set({ user }),
+  user: undefined,
+  setUser: (user: User | undefined) => set({ user }),
   addContact: (contact: Contact) => {
     set((state) => {
       if (!state.user) throw new Error("No current user found");

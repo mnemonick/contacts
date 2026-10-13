@@ -3,7 +3,7 @@ import sql from "%/utils/sql.ts";
 import { isId, isObject, isText } from "%/utils/validate.ts";
 
 export default async function (c: Context) {
-  const body: unknown = await c.req.json().catch(() => null);
+  const body: unknown = await c.req.json().catch(() => undefined);
 
   if (!isObject(body)) return c.json({ error: "BODY_INVALID" });
 

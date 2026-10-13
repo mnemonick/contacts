@@ -54,7 +54,7 @@ export default function ({ name, onChange, value, onDirty, icon, invalid, style,
       <span style={$icon} className="material-symbols-outlined">
         {icon}
       </span>
-    ) : null,
+    ) : undefined,
     <input
       maxLength={TEXT_MAX}
       {...rest}

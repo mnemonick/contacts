@@ -1,21 +1,21 @@
 #!/bin/sh
 
 # PROVIDE: sender
-# REQUIRE: LOGIN backend
+# REQUIRE: LOGIN
 # KEYWORD: shutdown
 
 . /etc/rc.subr
 
 name="sender"
 rcvar="${name}_enable"
-
 load_rc_config $name
-: ${sender_enable:="NO"}
-: ${sender_chdir:="/root/contacts-manager/sender"}
 
+sender_enable="YES"
+sender_chdir="/root/contacts-manager/sender"
 pidfile="${sender_chdir}/${name}.pid"
+
 procname="daemon"
 command="/usr/sbin/daemon"
-command_args="-r -t ${name} -P ${pidfile} -o ${sender_chdir}/${name}.log /usr/local/bin/deno task start"
+command_args="-t ${name} -P ${pidfile} -o ${sender_chdir}/${name}.log /usr/local/bin/deno task start"
 
 run_rc_command "$1"

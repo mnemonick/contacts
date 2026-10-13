@@ -1,0 +1,13 @@
+language js
+
+// Colors come only from #/utils/colors.ts: a color literal anywhere else is a hardcoded value.
+or {
+  JsStringLiteralExpression() as $color where {
+    $color <: r"[\"'].*(?:#[0-9a-fA-F]{3,8}\b|(?:rgba?|hsla?|hwb|oklch|oklab|lab|lch|color)\().*[\"']"
+  },
+  JsTemplateExpression() as $color where {
+    $color <: r"`.*(?:#[0-9a-fA-F]{3,8}\b|(?:rgba?|hsla?|hwb|oklch|oklab|lab|lch|color)\().*`"
+  }
+} where {
+  register_diagnostic(span=$color, message="Colors only from #/utils/colors.ts, no hardcoded values.", severity="error")
+}

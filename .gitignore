@@ -1,0 +1,14 @@
+.idea
+node_modules
+
+backend/diagnostics
+
+tests/test-results
+
+sender/public
+
+
+.env
+
+*.pid
+*.log

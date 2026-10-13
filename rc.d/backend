@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# PROVIDE: backend
+# REQUIRE: LOGIN postgresql
+# KEYWORD: shutdown
+
+. /etc/rc.subr
+
+name="backend"
+rcvar="${name}_enable"
+
+load_rc_config $name
+: ${backend_enable:="NO"}
+: ${backend_chdir:="/root/contacts-manager/backend"}
+
+pidfile="${backend_chdir}/${name}.pid"
+procname="daemon"
+command="/usr/sbin/daemon"
+command_args="-r -t ${name} -P ${pidfile} -o ${backend_chdir}/${name}.log /usr/local/bin/deno task start"
+
+run_rc_command "$1"

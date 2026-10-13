@@ -1,0 +1,26 @@
+{
+  "$schema": "https://raw.githubusercontent.com/denoland/deno/main/cli/schemas/config-file.v1.json",
+  "tasks": {
+    "validate": {
+      "description": "Type-checks the tests",
+      "command": "deno check specs/ utils.ts playwright.config.ts"
+    },
+    "test": {
+      "description": "Runs the E2E tests (needs PostgreSQL, a running backend and sender)",
+      "command": "deno run --permission-set=playwright playwright test"
+    }
+  },
+  "imports": {
+    "$/": "./",
+    "@playwright/test": "npm:@playwright/test@1.63.0",
+    "playwright": "npm:playwright@1.63.0"
+  },
+  "compilerOptions": {
+    "paths": { "$/*": ["./*"] }
+  },
+  "permissions": {
+    "playwright": {
+      "all": true
+    }
+  }
+}

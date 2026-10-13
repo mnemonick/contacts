@@ -1,0 +1,10 @@
+language js(typescript, jsx)
+
+// Refs are named with the Ref suffix; the $ prefix is reserved for style constants.
+or {
+  `const $name = useRef($args)`,
+  `const $name = useRef<$type>($args)`
+} where {
+  $name <: not r".*Ref",
+  register_diagnostic(span=$name, message="Name a ref with the Ref suffix: const modalRef = useRef(...).", severity="error")
+}

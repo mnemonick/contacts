@@ -1,0 +1,377 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.5.14/schema.json",
+  "plugins": ["./biome/no-deno-env.grit"],
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "lineWidth": 120
+  },
+  "linter": {
+    "enabled": true,
+    "includes": ["./**"],
+    "rules": {
+      "preset": "none",
+      "suspicious": {
+        "noParametersOnlyUsedInRecursion": "warn",
+        "noCompareNegZero": "warn",
+        "noImportCycles": "warn",
+        "noShadowRestrictedNames": "warn",
+        "noConstEnum": "warn",
+        "useIsArray": "warn",
+        "useErrorMessage": "warn",
+        "noGlobalAssign": "warn",
+        "noCatchAssign": "warn",
+        "useArraySortCompare": "warn",
+        "noClassAssign": "warn",
+        "noMisrefactoredShorthandAssign": "warn",
+        "noThenProperty": "warn",
+        "noProto": "warn",
+        "noEmptyInterface": "warn",
+        "noDuplicateElseIf": "warn",
+        "noDuplicateParameters": "warn",
+        "noOctalEscape": "warn",
+        "useGetterReturn": "warn",
+        "noDuplicateClassMembers": "warn",
+        "noLabelVar": "warn",
+        "noMisleadingInstantiator": "warn",
+        "useNumberToFixedDigitsArgument": "warn",
+        "noNestedPromises": "warn",
+        "noDeprecatedImports": "warn",
+        "noEmptyBlockStatements": "warn",
+        "noDuplicateEnumValues": "warn",
+        "noImportAssign": "warn",
+        "useIterableCallbackReturn": "warn",
+        "noUnassignedVariables": "warn",
+        "noShadow": "warn",
+        "noFallthroughSwitchClause": "warn",
+        "noEvolvingTypes": "warn",
+        "noDoubleEquals": "warn",
+        "noFunctionAssign": "warn",
+        "noGlobalIsNan": "warn",
+        "noExtraNonNullAssertion": "warn",
+        "useAwait": "warn",
+        "noPrototypeBuiltins": "warn",
+        "noUnsafeNegation": "warn",
+        "noTemplateCurlyInString": "warn",
+        "useNamespaceKeyword": "warn",
+        "noBitwiseOperators": "warn",
+        "noDuplicateObjectKeys": "warn",
+        "noNonNullAssertedOptionalChain": "warn",
+        "noSelfCompare": "warn",
+        "noUselessEscapeInString": "warn",
+        "noMisleadingCharacterClass": "warn",
+        "noControlCharactersInRegex": "warn",
+        "noConfusingVoidType": "warn",
+        "noAsyncPromiseExecutor": "warn",
+        "noDuplicateDependencies": "warn",
+        "noIrregularWhitespace": "warn",
+        "noGlobalIsFinite": "warn",
+        "noEmptySource": "warn",
+        "noAssignInExpressions": "warn",
+        "noDebugger": "warn",
+        "noConstantBinaryExpressions": "warn",
+        "noSparseArray": "warn",
+        "noEqualsToNull": "warn",
+        "noUnsafeDeclarationMerging": "warn",
+        "useDefaultSwitchClauseLast": "warn",
+        "noRedundantUseStrict": "warn",
+        "noUselessRegexBackrefs": "warn",
+        "noRedeclare": "warn",
+        "noWith": "warn",
+        "noDuplicateCase": "warn",
+        "noVar": "warn",
+        "noConfusingLabels": "warn",
+        "noUnnecessaryConditions": "warn",
+        "noApproximativeNumericConstant": "warn",
+        "noSuspiciousSemicolonInJsx": "warn",
+        "noAlert": "warn",
+        "useAdjacentOverloadSignatures": "warn",
+        "noLeakedRender": "warn",
+        "noUnknownAtRules": "warn",
+        "noDeprecatedMediaType": "warn",
+        "noDocumentCookie": "warn",
+        "noDuplicateFontNames": "warn",
+        "useGoogleFontDisplay": "warn",
+        "noReactForwardRef": "warn",
+        "noDuplicateProperties": "warn",
+        "noUnknownAttribute": {
+          "level": "warn",
+          "options": {
+            "ignore": ["precedence"]
+          }
+        },
+        "noImportantInKeyframe": "warn",
+        "noCommentText": "warn",
+        "noDuplicateJsxProps": "warn",
+        "noDuplicatedSpreadProps": "warn",
+        "useStaticResponseMethods": "warn",
+        "noShorthandPropertyOverrides": "warn",
+        "noDuplicateSelectorsKeyframeBlock": "warn",
+        "noSkippedTests": "warn",
+        "noDuplicateTestHooks": "warn",
+        "noExportsInTest": "warn",
+        "noMisplacedAssertion": "warn",
+        "noFocusedTests": "warn"
+      },
+      "security": {
+        "noDangerouslySetInnerHtmlWithChildren": "warn",
+        "noBlankTarget": "warn",
+        "noScriptUrl": "warn",
+        "noDangerouslySetInnerHtml": "warn",
+        "noGlobalEval": "warn"
+      },
+      "performance": {
+        "noDynamicNamespaceImportAccess": "warn",
+        "useGoogleFontPreconnect": "warn"
+      },
+      "nursery": {
+        "noUnsafePlusOperands": "warn",
+        "useDisposables": "warn",
+        "noTopLevelLiterals": "warn",
+        "useArraySome": "warn",
+        "noUnnecessaryTemplateExpression": "warn",
+        "noMisusedPromises": "warn",
+        "useImportsFirst": "warn",
+        "noExcessiveNestedCallbacks": "warn",
+        "useStringStartsEndsWith": "warn",
+        "useAwaitThenable": "warn",
+        "noUselessTypeConversion": "warn",
+        "useNullishCoalescing": "warn",
+        "noBaseToString": "warn",
+        "noImpliedEval": "warn",
+        "useRegexpExec": "warn",
+        "useRegexpTest": "warn",
+        "useVarsOnTop": "warn",
+        "noEmptyObjectKeys": "warn",
+        "noLoopFunc": "warn",
+        "useExhaustiveSwitchCases": "warn",
+        "noDuplicateSelectors": "warn",
+        "noJsxLeakedDollar": "warn",
+        "useDomQuerySelector": "warn",
+        "noExcessiveSelectorClasses": "warn",
+        "noUndeclaredClasses": "warn",
+        "useDomNodeTextContent": "warn",
+        "useReactFunctionComponentDefinition": "warn",
+        "noComponentHookFactories": "warn",
+        "useExpect": "warn",
+        "noIdenticalTestTitle": "warn",
+        "useTestHooksOnTop": "warn",
+        "noPlaywrightWaitForNavigation": "warn",
+        "noPlaywrightUselessAwait": "warn",
+        "noPlaywrightForceOption": "warn",
+        "noPlaywrightMissingAwait": "warn",
+        "usePlaywrightValidDescribeCallback": "warn",
+        "useTestHooksInOrder": "warn",
+        "noConditionalExpect": "warn",
+        "noPlaywrightEval": "warn"
+      },
+      "complexity": {
+        "noUselessUndefinedInitialization": "warn",
+        "noCommaOperator": "warn",
+        "useOptionalChain": "warn",
+        "noUselessRename": "warn",
+        "useArrayFind": "warn",
+        "useSimplifiedLogicExpression": "warn",
+        "noImplicitCoercions": "warn",
+        "noRedundantDefaultExport": "warn",
+        "noUselessUndefined": "warn",
+        "noVoid": "warn",
+        "noDivRegex": "warn",
+        "noThisInStatic": "warn",
+        "noExtraBooleanCast": "warn",
+        "useRegexLiterals": "warn",
+        "noUselessLabel": "warn",
+        "noUselessTernary": "warn",
+        "useDateNow": "warn",
+        "noForEach": "warn",
+        "noUselessContinue": "warn",
+        "noUselessEscapeInRegex": "warn",
+        "noUselessThisAlias": "warn",
+        "useWhile": "warn",
+        "useNumericLiterals": "warn",
+        "noFlatMapIdentity": "warn",
+        "noStaticOnlyClass": "warn",
+        "noUselessCatchBinding": "warn",
+        "noUselessCatch": "warn",
+        "noUselessSwitchCase": "warn",
+        "noUselessStringConcat": "warn",
+        "noBannedTypes": "warn",
+        "useFlatMap": "warn",
+        "noUselessStringRaw": "warn",
+        "noUselessEmptyExport": "warn",
+        "useIndexOf": "warn",
+        "useLiteralKeys": "warn",
+        "noUselessConstructor": "warn",
+        "noAdjacentSpacesInRegex": "warn",
+        "noUselessLoneBlockStatements": "warn",
+        "noUselessTypeConstraint": "warn",
+        "useArrowFunction": "warn",
+        "noUselessFragments": "warn"
+      },
+      "style": {
+        "useShorthandAssign": "warn",
+        "useImportType": "warn",
+        "useSingleVarDeclarator": "warn",
+        "noParameterProperties": "warn",
+        "noExportedImports": "warn",
+        "noExcessiveClassesPerFile": "warn",
+        "noNestedTernary": "warn",
+        "useCollapsedIf": "warn",
+        "useObjectSpread": "warn",
+        "useExponentiationOperator": "warn",
+        "useThrowOnlyError": "warn",
+        "noMultiAssign": "warn",
+        "useForOf": "warn",
+        "useConsistentArrayType": "warn",
+        "useConst": "warn",
+        "noUnusedTemplateLiteral": "warn",
+        "useConsistentEnumValueType": "warn",
+        "noRestrictedImports": {
+          "level": "error",
+          "options": {
+            "patterns": [
+              {
+                "group": ["./**", "../**"],
+                "message": "Use an alias (~/ project root, #/ frontend, %/ backend, $/ tests): Vite bundles a relatively imported file twice if it is also imported via an alias."
+              }
+            ]
+          }
+        },
+        "noYodaExpression": "warn",
+        "noUselessElse": "warn",
+        "useGroupedAccessorPairs": "warn",
+        "noSubstr": "warn",
+        "useDefaultParameterLast": "warn",
+        "useArrayLiterals": "warn",
+        "useExportType": "warn",
+        "useReadonlyClassProperties": "warn",
+        "useNumericSeparators": "warn",
+        "useThrowNewError": "warn",
+        "useConsistentBuiltinInstantiation": "warn",
+        "noDescendingSpecificity": "warn",
+        "noImplicitBoolean": "warn",
+        "useLiteralEnumMembers": "warn",
+        "useReactFunctionComponents": "warn",
+        "useSelfClosingElements": "warn",
+        "useConsistentCurlyBraces": "warn",
+        "noRestrictedGlobals": {
+          "level": "warn",
+          "options": {
+            "deniedGlobals": {
+              "Date": "Use Temporal",
+              "fetch": "Use the typed client #/utils/client.ts"
+            }
+          }
+        }
+      },
+      "correctness": {
+        "noUnsafeOptionalChaining": "warn",
+        "noUnusedVariables": "warn",
+        "noGlobalObjectCalls": "warn",
+        "noVoidTypeReturn": "warn",
+        "noRestrictedElements": {
+          "level": "warn",
+          "options": {
+            "elements": {
+              "div": "Use a custom tag named by the layer's role"
+            }
+          }
+        },
+        "noUnusedFunctionParameters": "warn",
+        "noStringCaseMismatch": "warn",
+        "noEmptyCharacterClassInRegex": "warn",
+        "noInvalidUseBeforeDeclaration": "warn",
+        "noInvalidConstructorSuper": "warn",
+        "noConstructorReturn": "warn",
+        "noConstantMathMinMaxClamp": "warn",
+        "noUnusedInstantiation": "warn",
+        "noUnreachable": "warn",
+        "noNodejsModules": "warn",
+        "noUnusedLabels": "warn",
+        "noSelfAssign": "warn",
+        "useYield": "warn",
+        "noUnreachableSuper": "warn",
+        "useIsNan": "warn",
+        "noInvalidBuiltinInstantiation": "warn",
+        "noUnusedPrivateClassMembers": "warn",
+        "noGlobalDirnameFilename": "warn",
+        "noEmptyPattern": "warn",
+        "useValidTypeof": "warn",
+        "noPrivateImports": "warn",
+        "noNestedComponentDefinitions": "warn",
+        "noUnknownMediaFeatureName": "warn",
+        "noUnknownFunction": "warn",
+        "noUnknownUnit": "warn",
+        "noUnknownPseudoClass": "warn",
+        "useJsxKeyInIterable": "warn",
+        "noDuplicateAttributes": "warn",
+        "noRenderReturnValue": "warn",
+        "noVoidElementsWithChildren": "warn",
+        "useLoneAnonymousOperation": "warn",
+        "noSwitchDeclarations": "warn",
+        "noReactPropAssignments": "warn",
+        "noUnusedImports": "warn",
+        "noUnknownPseudoElement": "warn",
+        "noInvalidDirectionInLinearGradient": "warn",
+        "noChildrenProp": "warn",
+        "noUnsafeFinally": "warn"
+      }
+    }
+  },
+  "overrides": [
+    {
+      "includes": ["frontend/**", "!frontend/utils/colors.ts"],
+      "plugins": ["./biome/no-hardcoded-colors.grit", "./biome/use-ref-suffix.grit"]
+    },
+    {
+      "includes": ["frontend/components/**"],
+      "plugins": ["./biome/anonymous-component.grit"]
+    },
+    {
+      "includes": ["frontend/**", "!frontend/vite.config.ts"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedImports": {
+              "level": "error",
+              "options": {
+                "paths": {
+                  "~/args.ts": "args.ts holds secrets and would end up in the bundle: vite.config.ts passes the needed values via define."
+                },
+                "patterns": [
+                  {
+                    "group": ["./**", "../**"],
+                    "message": "Use an alias (~/ project root, #/ frontend, %/ backend, $/ tests): Vite bundles a relatively imported file twice if it is also imported via an alias."
+                  }
+                ]
+              }
+            },
+            "noRestrictedGlobals": {
+              "level": "warn",
+              "options": {
+                "deniedGlobals": {
+                  "Date": "Use Temporal",
+                  "fetch": "Use the typed client #/utils/client.ts",
+                  "Deno": "The frontend runs in the browser: Deno APIs exist only in vite.config.ts"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "assist": {
+    "enabled": false
+  },
+  "javascript": {
+    "formatter": {
+      "trailingCommas": "none"
+    }
+  }
+}

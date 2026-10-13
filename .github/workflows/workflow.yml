@@ -1,0 +1,111 @@
+name: CI/CD
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches: [ master ]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/master' }}
+
+jobs:
+  build:
+    name: Building
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:18
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_DB: main
+          # The backend connects without a password, as in local development.
+          POSTGRES_HOST_AUTH_METHOD: trust
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      # The full history is fetched so gitleaks scans every commit, not only the last one.
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+          cache: true
+          cache-hash: ${{ hashFiles('./deno.lock') }}
+
+      - name: Install dependencies
+        run: deno install --frozen
+
+      # args.ts is in git with development values; a production secret committed by mistake fails the build.
+      - name: Scan for secrets
+        run: deno task gitleaks
+
+      - name: Check types
+        run: deno task --recursive types
+
+      - name: Lint and check formatting
+        run: deno task check
+
+      - name: Check spelling
+        run: deno task cspell
+
+      - name: Build frontend
+        run: deno task --cwd=frontend build
+
+      # Servers run in the background; "wait" blocks until their port accepts connections.
+      - name: Start backend
+        run: deno task --cwd=backend start &
+
+      - name: Wait for backend
+        run: deno task --cwd=backend wait
+
+      - name: Start sender
+        run: deno task --cwd=sender start &
+
+      - name: Wait for sender
+        run: deno task --cwd=sender wait
+
+      - name: Restore Playwright browsers
+        uses: actions/cache@v4
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('./deno.lock') }}
+
+      - name: Install Playwright system dependencies
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: deno run -A playwright install-deps chromium
+        working-directory: tests
+
+      - name: Install Playwright browsers
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: deno run -A playwright install --with-deps chromium
+        working-directory: tests
+
+      # --forbid-only fails on a forgotten test.only; the github reporter annotates failures in the PR.
+      - name: E2E
+        run: deno task --cwd=tests test --forbid-only --retries=1 --reporter=github,list
+
+      - name: Upload test results
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: tests/test-results
+          retention-days: 7
+

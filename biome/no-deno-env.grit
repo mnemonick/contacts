@@ -1,0 +1,6 @@
+language js
+
+// Settings live in the root args.ts: no environment variables, every library gets its settings as parameters.
+`Deno.env` as $env where {
+  register_diagnostic(span=$env, message="No environment variables: settings come from ~/args.ts.", severity="error")
+}

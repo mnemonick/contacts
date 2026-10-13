@@ -1,0 +1,7 @@
+language js
+
+// A component is an anonymous export default function ().
+`export default function $name($params) { $body }` where {
+  $name <: not .,
+  register_diagnostic(span=$name, message="A component is an anonymous export default function ().", severity="error")
+}

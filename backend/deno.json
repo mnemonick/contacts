@@ -1,0 +1,37 @@
+{
+  "$schema": "https://raw.githubusercontent.com/denoland/deno/main/cli/schemas/config-file.v1.json",
+  "tasks": {
+    "watch": {
+      "description": "Runs the backend and hot-reloads it on file changes",
+      "command": "deno watch --permission-set=default backend.ts"
+    },
+    "validate": {
+      "description": "Type-checks the backend",
+      "command": "deno check backend.ts"
+    },
+    "start": {
+      "description": "Runs the backend (port 2001)",
+      "command": "deno run --permission-set=default backend.ts"
+    },
+    "wait": {
+      "description": "Blocks until the backend accepts connections on port 2001 (CI)",
+      "command": "deno run --permission-set=wait wait-on tcp:2001 --timeout 4000"
+    }
+  },
+  "imports": {
+    "pg-error-enum": "npm:pg-error-enum@^2.0.1",
+    "postgres": "npm:postgres@^3.4.9",
+    "postgres-shift": "npm:postgres-shift@1.0.2"
+  },
+  "permissions": {
+    "default": {
+      "net": true,
+      "read": true,
+      "env": true
+    },
+    "wait": {
+      "net": true,
+      "env": true
+    }
+  }
+}

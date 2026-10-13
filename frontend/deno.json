@@ -1,12 +1,12 @@
 {
-  "$schema": "../config-file.v1.json",
+  "$schema": "https://raw.githubusercontent.com/denoland/deno/main/cli/schemas/config-file.v1.json",
   "tasks": {
     "watch": {
       "description": "Rebuilds the frontend into sender/public on file changes (no dev server: the sender serves it)",
       "command": "deno run --permission-set=vite vite build --configLoader native --mode=development --watch"
     },
     "validate": {
-      "description": "Type-checks the frontend",
+      "description": "Validate frontend types",
       "command": "deno check frontend.tsx vite.config.ts"
     },
     "build": {

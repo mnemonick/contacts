@@ -1,12 +1,12 @@
 {
-  "$schema": "../config-file.v1.json",
+  "$schema": "https://raw.githubusercontent.com/denoland/deno/main/cli/schemas/config-file.v1.json",
   "tasks": {
     "watch": {
       "description": "Runs the sender and hot-reloads it on file changes",
       "command": "deno watch --permission-set=sender sender.ts"
     },
     "validate": {
-      "description": "Type-checks the sender",
+      "description": "Validate sender types",
       "command": "deno check sender.ts"
     },
     "start": {

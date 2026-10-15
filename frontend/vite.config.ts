@@ -33,13 +33,14 @@ export default defineConfig(({ mode }) => ({
     sourcemap: true,
     minify: mode === "production",
     rollupOptions: {
-      input: resolve(dirname, "index.html"),
       treeshake: {
         moduleSideEffects: (id: string) => !id.replaceAll("\\", "/").startsWith(backend)
       },
       output: {
         codeSplitting: {
-          groups: [{ name: "js-temporal", test: /js-temporal/ }]
+          groups: [
+						{ name: "js-temporal", test: /js-temporal/ }
+					]
         }
       }
     }

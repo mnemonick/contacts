@@ -333,7 +333,7 @@
       "plugins": ["./biome/anonymous-component.grit"]
     },
     {
-      "includes": ["frontend/**", "!frontend/vite.config.ts"],
+      "includes": ["frontend/**", "!**/vite.config.ts"],
       "linter": {
         "rules": {
           "style": {

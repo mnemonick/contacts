@@ -13,6 +13,10 @@
     "gitleaks": {
       "description": "Scans repo for committed secrets",
       "command": "docker run --rm --volume ./:/repo ghcr.io/gitleaks/gitleaks:v8.30.1 git /repo --no-banner --redact --verbose"
+    },
+    "lighthouse": {
+      "description": "Lighthouse audit of the running frontend",
+      "command": "deno run -A lighthouse http://localhost:4173--output=html --output-path=./lighthouse-report.html --only-categories=performance,accessibility,best-practices,seo"
     }
   },
   "workspace": ["./frontend", "./backend", "./sender", "./tests"],
@@ -50,7 +54,8 @@
     "wouter": "npm:wouter@3.11.0",
     "zustand": "npm:zustand@5.0.15",
     "@playwright/test": "npm:@playwright/test@1.63.0",
-    "playwright": "npm:playwright@1.63.0"
+    "playwright": "npm:playwright@1.63.0",
+    "lighthouse": "npm:lighthouse@13.5.0"
   },
   "permissions": {
     "biome": {

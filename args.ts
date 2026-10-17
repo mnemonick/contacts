@@ -2,7 +2,7 @@ type Mode = "production" | "development";
 
 export default {
   database: {
-    host: "localhost",
+    host: "localhost'",
     name: "main",
     user: "postgres"
   },

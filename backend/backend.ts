@@ -15,6 +15,7 @@ import removeContact from "%/handlers/remove-contact.ts";
 import updateContact from "%/handlers/update-contact.ts";
 import sql from "%/utils/sql.ts";
 import args from "~/args.ts";
+import secrets from "%/secrets.ts";
 
 // All handlers are POST requests with verb in URL instead of method.
 const hono = new Hono()
@@ -49,8 +50,8 @@ await shift({
 });
 
 // TLS only when args.tls is set (production). Locally the server runs over plain HTTP.
-const tls = args.tls
-  ? { cert: Deno.readTextFileSync(args.tls.cert), key: Deno.readTextFileSync(args.tls.key) }
+const tls = secrets.tls
+  ? { cert: Deno.readTextFileSync(secrets.tls.cert), key: Deno.readTextFileSync(secrets.tls.key) }
   : undefined;
 
 // Start listening.

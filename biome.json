@@ -341,7 +341,7 @@
               "level": "error",
               "options": {
                 "paths": {
-                  "~/args.ts": "args.ts holds secrets and would end up in the bundle: vite.config.ts passes the needed values via define."
+                  "%/secrets.ts": "secrets.ts holds secrets and would end up in the bundle: import only from backend, sender or vite.config.ts."
                 },
                 "patterns": [
                   {

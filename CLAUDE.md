@@ -4,7 +4,7 @@
 - Instead of Node built-ins: `@std/*` (`@std/path`), and the `Deno` namespace where `@std` has no equivalent (`Deno.readTextFileSync`, `Deno.cwd()`).
 - Shared frontend/backend types (`User`, `Contact`) - in `backend/utils/types.ts`.
 - New files are added to git staging (`git add <file>`) right after they are created.
-- Settings live in the root `args.ts`, imported as `~/args.ts`; every library gets its settings as explicit parameters.
+- Settings live in the root `args.ts` (`~/args.ts`); secrets live in `backend/secrets.ts` (`%/secrets.ts`), which frontend code must never import. Every library gets its settings as explicit parameters.
 - Backend and sender run via `deno run` (task `start`), without `deno compile`: Deno has no FreeBSD target.
 
 ## Frontend

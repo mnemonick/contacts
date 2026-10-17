@@ -1,14 +1,14 @@
 import "@total-typescript/ts-reset";
 import { createRoot } from "react-dom/client";
 import "#/utils/customs.ts";
-import "#/utils/defines.ts";
 import Router from "#/components/Router.tsx";
 import useGlobalStore from "#/stores/useGlobalStore.ts";
 import * as Sentry from "@sentry/react";
+import args from "~/args.ts";
 
 Sentry.init({
-  dsn: BETTERSTACK,
-  enabled: MODE === "production"
+  dsn: args.betterstack.dsn,
+  enabled: import.meta.env.MODE === "production"
 });
 
 if (!("Temporal" in globalThis)) {

@@ -4,6 +4,7 @@ import { secureHeaders } from "hono/secure-headers";
 import { serveFile } from "@std/http/file-server";
 import { join } from "@std/path";
 import args from "~/args.ts";
+import secrets from "%/secrets.ts";
 
 const publik = join(import.meta.dirname!, "./public");
 const dsn = args.betterstack.dsn ? new URL(args.betterstack.dsn) : undefined;
@@ -29,7 +30,7 @@ const headers = secureHeaders({
     ...(url ? { reportUri: url, reportTo: "csp" } : {})
   },
   reportingEndpoints: url ? [{ name: "csp", url }] : undefined,
-  strictTransportSecurity: args.tls ? "max-age=31536000" : false,
+  strictTransportSecurity: secrets.tls ? "max-age=31536000" : false,
   permissionsPolicy: {
     camera: [],
     microphone: [],
@@ -74,15 +75,15 @@ hono.get("*", async (c) => {
 });
 
 Deno.serve({
-  ...args.tls,
+  ...secrets.tls,
   port: tls ? 443 : 2000,
   automaticCompression: true,
-  onListen: (info) => console.log({ type: "LISTENING", port: info.port, tls: args.tls !== undefined }),
+  onListen: (info) => console.log({ type: "LISTENING", port: info.port, tls: secrets.tls !== undefined }),
   handler: hono.fetch
 });
 
 // Plain HTTP on port 80 is redirected to HTTPS. Only in production, where TLS is configured.
-if (args.tls !== undefined) {
+if (secrets.tls !== undefined) {
   Deno.serve({
 		port: 80,
 		onListen: ({port}) => console.log({ type: "LISTENING", port }),

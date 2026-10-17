@@ -51,7 +51,7 @@ jobs:
       - name: Install dependencies
         run: deno install --frozen
 
-      # args.ts is in git with development values; a production secret committed by mistake fails the build.
+      # args.ts and secrets.ts are in git with development values; a production secret committed by mistake fails the build.
       - name: Scan for secrets
         run: deno task gitleaks
 

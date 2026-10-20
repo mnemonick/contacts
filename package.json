@@ -1,0 +1,25 @@
+{
+  "name": "contacts-manager",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "./frontend",
+    "./backend",
+    "./sender",
+    "./tests"
+  ],
+  "scripts": {
+    "fix": "biome check --write --error-on-warnings",
+    "check": "biome ci --error-on-warnings",
+    "gitleaks": "docker run --rm --volume ./:/repo ghcr.io/gitleaks/gitleaks:v8.30.1 git /repo --no-banner --redact --verbose",
+    "validate": "bun run --filter '*' validate",
+    "lighthouse": "lighthouse http://localhost:4173 --output=html --output-path=./lighthouse-report.html --only-categories=performance,accessibility,best-practices,seo"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.14",
+    "@types/bun": "1.4.3",
+    "lighthouse": "13.5.0",
+    "typescript": "7.0.2",
+    "wait-on": "^9.5.1"
+  }
+}

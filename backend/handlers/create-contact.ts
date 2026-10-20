@@ -44,6 +44,4 @@ export type CreateContactRequest = {
   comment: string;
 };
 
-export type CreateContactResponse =
-  | { error: null; contact: Contact }
-  | { error: string };
+export type CreateContactResponse = { error: null; contact: Contact } | { error: string };

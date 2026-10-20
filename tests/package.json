@@ -1,0 +1,13 @@
+{
+  "name": "tests",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "validate": "tsc --noEmit",
+    "test": "playwright test"
+  },
+  "dependencies": {
+    "@playwright/test": "1.63.0",
+    "playwright": "1.63.0"
+  }
+}

@@ -48,6 +48,4 @@ export type UpdateContactRequest = {
   comment: string;
 };
 
-export type UpdateContactResponse =
-  | { error: string }
-  | { error: null; contact: Contact };
+export type UpdateContactResponse = { error: string } | { error: null; contact: Contact };

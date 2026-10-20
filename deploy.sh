@@ -6,8 +6,8 @@
   cd "$(dirname "$0")"
 
   git pull --ff-only
-  deno install --frozen
-  deno task --cwd=frontend build
+  bun install --frozen-lockfile
+  bun run --filter frontend build
 
   # Services are (re)installed on every deploy, so changes to the rc.d scripts are picked up too.
   install -m 755 rc.d/backend rc.d/sender /usr/local/etc/rc.d/

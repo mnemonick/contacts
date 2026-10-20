@@ -1,0 +1,15 @@
+{
+  "name": "sender",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "watch": "bun --watch sender.ts",
+    "validate": "tsc --noEmit",
+    "start": "bun sender.ts",
+    "wait": "wait-on tcp:3000 --timeout 4000"
+  },
+  "dependencies": {
+    "@total-typescript/ts-reset": "0.6.1",
+    "hono": "4.13.8"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "backend",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "watch": "bun --watch backend.ts",
+    "validate": "tsc --noEmit",
+    "start": "bun backend.ts",
+    "wait": "wait-on tcp:2001 --timeout 4000"
+  },
+  "dependencies": {
+    "@sentry/bun": "^11.4.0",
+    "@total-typescript/ts-reset": "0.6.1",
+    "hono": "4.13.8",
+    "postgres": "^3.4.9",
+    "postgres-shift": "1.0.2"
+  }
+}

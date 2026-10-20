@@ -5,8 +5,9 @@ import { cors } from "hono/cors";
 import { HTTPException } from "hono/http-exception";
 import { logger } from "hono/logger";
 import { timeout } from "hono/timeout";
-import { resolve } from "@std/path";
-import * as Sentry from "@sentry/deno";
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
+import * as Sentry from "@sentry/bun";
 import shift from "postgres-shift";
 import createContact from "%/handlers/create-contact.ts";
 import createUser from "%/handlers/create-user.ts";
@@ -51,26 +52,26 @@ await shift({
 
 // TLS only when args.tls is set (production). Locally the server runs over plain HTTP.
 const tls = secrets.tls
-  ? { cert: Deno.readTextFileSync(secrets.tls.cert), key: Deno.readTextFileSync(secrets.tls.key) }
+  ? { cert: readFileSync(secrets.tls.cert, "utf8"), key: readFileSync(secrets.tls.key, "utf8") }
   : undefined;
 
 // Start listening.
-const server = Deno.serve({
-  ...tls,
+const server = Bun.serve({
+  tls,
   port: 2001,
-  handler: hono.fetch,
-  onListen: (info) => console.log({ type: "LISTENING", port: info.port, tls: tls !== undefined })
+  fetch: hono.fetch
 });
+console.log({ type: "LISTENING", port: server.port, tls: tls !== undefined });
 
 // Windows supports only SIGINT (Ctrl+C); on the server rc.d stops the process with SIGTERM.
-const signal = Deno.build.os === "windows" ? "SIGINT" : "SIGTERM";
+const signal = process.platform === "win32" ? "SIGINT" : "SIGTERM";
 
 // Finishes in-flight requests, then closes the database pool.
-Deno.addSignalListener(signal, async () => {
+process.on(signal, async () => {
   console.log({ type: "SHUTDOWN", signal });
-  await server.shutdown();
+  await server.stop();
   await sql.end({ timeout: 5 });
-  Deno.exit(0);
+  process.exit(0);
 });
 
 // Export types for frontend.

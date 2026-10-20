@@ -1,16 +1,15 @@
 import { defineConfig } from "vite";
-import deno from "@deno/vite-plugin";
 import { sentryVitePlugin } from "@sentry/vite-plugin";
-import { resolve } from "@std/path";
-import secrets from "%/secrets.ts";
+import { resolve } from "node:path";
+import secrets from "../backend/secrets.ts";
 
 const dirname = import.meta.dirname as string;
+const root = resolve(dirname, "..").replaceAll("\\", "/");
 const backend = resolve(dirname, "..", "backend").replaceAll("\\", "/");
 
 export default defineConfig(({ mode }) => ({
   root: dirname,
   plugins: [
-    ...deno(),
     sentryVitePlugin({
       ...secrets.sentry,
       telemetry: false,
@@ -19,6 +18,7 @@ export default defineConfig(({ mode }) => ({
   ],
   resolve: {
     alias: {
+      "~": root,
       "#": dirname,
       "%": backend
     }
@@ -34,9 +34,7 @@ export default defineConfig(({ mode }) => ({
       },
       output: {
         codeSplitting: {
-          groups: [
-						{ name: "js-temporal", test: /js-temporal/ }
-					]
+          groups: [{ name: "js-temporal", test: /js-temporal/ }]
         }
       }
     }

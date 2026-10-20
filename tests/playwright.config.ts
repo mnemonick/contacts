@@ -2,7 +2,7 @@ import { defineConfig, devices } from "@playwright/test";
 
 export default defineConfig({
   testDir: "./specs",
-  tsconfig: "./deno.json",
+  tsconfig: "./tsconfig.json",
   fullyParallel: true,
   use: {
     baseURL: "http://localhost:3000",

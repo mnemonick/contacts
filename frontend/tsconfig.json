@@ -1,0 +1,10 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "lib": ["dom", "dom.iterable", "dom.asynciterable", "esnext.temporal", "esnext"],
+    "types": ["vite/client", "bun"]
+  },
+  "include": ["./**/*.ts", "./**/*.tsx", "../args.ts"]
+}

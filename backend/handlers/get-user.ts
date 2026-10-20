@@ -62,6 +62,4 @@ export type GetUserRequest = {
   password: string;
 };
 
-export type GetUserResponse =
-  | { error: null; user: User }
-  | { error: string };
+export type GetUserResponse = { error: null; user: User } | { error: string };

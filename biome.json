@@ -1,6 +1,6 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.5.14/schema.json",
-  "plugins": ["./biome/no-deno-env.grit"],
+  "plugins": ["./biome/no-env.grit"],
   "vcs": {
     "enabled": true,
     "clientKind": "git",
@@ -291,7 +291,7 @@
         "noConstantMathMinMaxClamp": "warn",
         "noUnusedInstantiation": "warn",
         "noUnreachable": "warn",
-        "noNodejsModules": "warn",
+        "noNodejsModules": "off",
         "noUnusedLabels": "warn",
         "noSelfAssign": "warn",
         "useYield": "warn",
@@ -325,6 +325,16 @@
   },
   "overrides": [
     {
+      "includes": ["**/vite.config.ts"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedImports": "off"
+          }
+        }
+      }
+    },
+    {
       "includes": ["frontend/**", "!frontend/utils/colors.ts"],
       "plugins": ["./biome/no-hardcoded-colors.grit", "./biome/use-ref-suffix.grit"]
     },
@@ -357,7 +367,7 @@
                 "deniedGlobals": {
                   "Date": "Use Temporal",
                   "fetch": "Use the typed client #/utils/client.ts",
-                  "Deno": "The frontend runs in the browser: Deno APIs exist only in vite.config.ts"
+                  "Bun": "The frontend runs in the browser: Bun APIs exist only in vite.config.ts"
                 }
               }
             }

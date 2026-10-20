@@ -1,0 +1,26 @@
+{
+  "name": "frontend",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "watch": "vite build --mode=development --watch",
+    "validate": "tsc --noEmit",
+    "build": "vite build --mode=production"
+  },
+  "dependencies": {
+    "@js-temporal/polyfill": "0.5.1",
+    "@sentry/react": "^11.4.0",
+    "@total-typescript/ts-reset": "0.6.1",
+    "hono": "4.13.8",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "wouter": "3.11.0",
+    "zustand": "5.0.15"
+  },
+  "devDependencies": {
+    "@sentry/vite-plugin": "^5.4.0",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "vite": "8.3.0"
+  }
+}

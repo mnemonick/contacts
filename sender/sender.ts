@@ -1,11 +1,17 @@
 import "@total-typescript/ts-reset";
 import { Hono } from "hono";
+import { compress } from "hono/compress";
 import { secureHeaders } from "hono/secure-headers";
-import { serveFile } from "@std/http/file-server";
-import { join } from "@std/path";
+import { join } from "node:path";
 import args from "~/args.ts";
 
 const publik = join(import.meta.dirname!, "./public");
+
+// Bun.file sets Content-Type from the extension; a missing file is answered with 404.
+async function serveFile(path: string) {
+  const file = Bun.file(path);
+  return (await file.exists()) ? new Response(file) : new Response(null, { status: 404 });
+}
 const dsn = args.betterstack ? new URL(args.betterstack) : undefined;
 const betterstack = dsn ? `${dsn.origin}/api${dsn.pathname}/security/?sentry_key=${dsn.username}` : undefined;
 const headers = secureHeaders({
@@ -60,27 +66,26 @@ const headers = secureHeaders({
   }
 });
 
-const hono = new Hono().use(headers);
+const hono = new Hono().use(headers).use(compress());
 
 // All assets are cached except for 404.
 hono.get("/assets/*", async (c) => {
   const path = new URL(c.req.url).pathname;
-  const res = await serveFile(c.req.raw, join(publik, path));
+  const res = await serveFile(join(publik, path));
   res.headers.set("Cache-Control", res.status === 404 ? "no-store" : "public, max-age=31536000, immutable");
   return res;
 });
 
 // All other requests return index.html, which is not cached.
-hono.get("*", async (c) => {
-  const res = await serveFile(c.req.raw, join(publik, "index.html"));
+hono.get("*", async () => {
+  const res = await serveFile(join(publik, "index.html"));
   res.headers.set("Cache-Control", "no-cache");
   return res;
 });
 
 // Plain HTTP only: the conductor terminates TLS on 443 and redirects port 80.
-Deno.serve({
+const server = Bun.serve({
   port: 3000,
-  automaticCompression: true,
-  onListen: (info) => console.log({ type: "LISTENING", port: info.port }),
-  handler: hono.fetch
+  fetch: hono.fetch
 });
+console.log({ type: "LISTENING", port: server.port });

@@ -115,7 +115,9 @@ export default function ({ onClose }: Props) {
           {m.login}
         </Button>
       )}
-      {modal === "USER_NOT_FOUND" ? <ErrorModal onClose={() => setModal("NONE")}>{m.userNotFound}</ErrorModal> : undefined}
+      {modal === "USER_NOT_FOUND" ? (
+        <ErrorModal onClose={() => setModal("NONE")}>{m.userNotFound}</ErrorModal>
+      ) : undefined}
       {modal === "UNEXPECTED" ? <ErrorModal onClose={() => setModal("NONE")}>{m.unexpected}</ErrorModal> : undefined}
       {modal === "LOADER" ? <Loader /> : undefined}
     </Modal>

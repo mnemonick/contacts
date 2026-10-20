@@ -38,7 +38,7 @@ export default function ({ children }: Props) {
   };
 
   // Touch screens have no hover, so the tooltip is not rendered there.
-  if (pointer === "TOUCH") return undefined;
+  if (pointer === "TOUCH") return;
   if (pointer === "MOUSE") {
     return (
       <trigger onMouseMove={show} onMouseLeave={hide} style={$trigger}>

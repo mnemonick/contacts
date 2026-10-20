@@ -41,62 +41,60 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Deno
-        uses: denoland/setup-deno@v2
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          deno-version: v2.x
-          cache: true
-          cache-hash: ${{ hashFiles('./deno.lock') }}
+          bun-version: 1.4.3
 
       - name: Install dependencies
-        run: deno install --frozen
+        run: bun install --frozen-lockfile
 
       # args.ts and secrets.ts are in git with development values; a production secret committed by mistake fails the build.
       - name: Scan for secrets
-        run: deno task gitleaks
+        run: bun run gitleaks
 
       - name: Check types
-        run: deno task --recursive validate
+        run: bun run validate
 
       - name: Lint and check formatting
-        run: deno task check
+        run: bun run check
 
       - name: Build frontend
-        run: deno task --cwd=frontend build
+        run: bun run --filter frontend build
 
       # Servers run in the background; "wait" blocks until their port accepts connections.
       - name: Start backend
-        run: deno task --cwd=backend start &
+        run: bun run --filter backend start &
 
       - name: Wait for backend
-        run: deno task --cwd=backend wait
+        run: bun run --filter backend wait
 
       - name: Start sender
-        run: deno task --cwd=sender start &
+        run: bun run --filter sender start &
 
       - name: Wait for sender
-        run: deno task --cwd=sender wait
+        run: bun run --filter sender wait
 
       - name: Restore Playwright browsers
         uses: actions/cache@v4
         id: playwright-cache
         with:
           path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ hashFiles('./deno.lock') }}
+          key: ${{ runner.os }}-playwright-${{ hashFiles('./bun.lock') }}
 
       - name: Install Playwright system dependencies
         if: steps.playwright-cache.outputs.cache-hit == 'true'
-        run: deno run -A playwright install-deps chromium
+        run: bunx playwright install-deps chromium
         working-directory: tests
 
       - name: Install Playwright browsers
         if: steps.playwright-cache.outputs.cache-hit != 'true'
-        run: deno run -A playwright install --with-deps chromium
+        run: bunx playwright install --with-deps chromium
         working-directory: tests
 
       # --forbid-only fails on a forgotten test.only; the github reporter annotates failures in the PR.
       - name: E2E
-        run: deno task --cwd=tests test --forbid-only --retries=1 --reporter=github,list
+        run: bun run --filter tests test --forbid-only --retries=1 --reporter=github,list
 
       - name: Upload test results
         if: failure()
@@ -105,4 +103,3 @@ jobs:
           name: test-results
           path: tests/test-results
           retention-days: 7
-

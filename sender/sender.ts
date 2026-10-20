@@ -4,20 +4,22 @@ import { secureHeaders } from "hono/secure-headers";
 import { serveFile } from "@std/http/file-server";
 import { join } from "@std/path";
 import args from "~/args.ts";
-import secrets from "%/secrets.ts";
 
 const publik = join(import.meta.dirname!, "./public");
-const dsn = args.betterstack.dsn ? new URL(args.betterstack.dsn) : undefined;
-const url = dsn ? `${dsn.origin}/api${dsn.pathname}/security/?sentry_key=${dsn.username}` : undefined;
+const dsn = args.betterstack ? new URL(args.betterstack) : undefined;
+const betterstack = dsn ? `${dsn.origin}/api${dsn.pathname}/security/?sentry_key=${dsn.username}` : undefined;
 const headers = secureHeaders({
   contentSecurityPolicy: {
     defaultSrc: ["'none'"],
     scriptSrc: ["'self'"],
     connectSrc: [
       "'self'",
+      // Behind the conductor the public scheme and host come from X-Forwarded-*; req.url shows 127.0.0.1.
       (c) => {
-        const { protocol, hostname } = new URL(c.req.url);
-        return `${protocol}//${hostname}:2001`;
+        const url = new URL(c.req.url);
+        const protocol = c.req.header("x-forwarded-proto") ?? url.protocol.slice(0, -1);
+        const hostname = c.req.header("x-forwarded-host") ?? url.hostname;
+        return `${protocol}://${hostname}:2001`;
       },
       ...(dsn ? [dsn.origin] : [])
     ],
@@ -27,10 +29,11 @@ const headers = secureHeaders({
     baseUri: ["'none'"],
     formAction: ["'self'"],
     frameAncestors: ["'none'"],
-    ...(url ? { reportUri: url, reportTo: "csp" } : {})
+    ...(betterstack ? { reportUri: betterstack, reportTo: "csp" } : {})
   },
-  reportingEndpoints: url ? [{ name: "csp", url }] : undefined,
-  strictTransportSecurity: secrets.tls ? "max-age=31536000" : false,
+  reportingEndpoints: betterstack ? [{ name: "csp", url: betterstack }] : undefined,
+  // The conductor sends HSTS for the public site.
+  strictTransportSecurity: false,
   permissionsPolicy: {
     camera: [],
     microphone: [],
@@ -74,19 +77,10 @@ hono.get("*", async (c) => {
   return res;
 });
 
+// Plain HTTP only: the conductor terminates TLS on 443 and redirects port 80.
 Deno.serve({
-  ...secrets.tls,
-  port: tls ? 443 : 2000,
+  port: 3000,
   automaticCompression: true,
-  onListen: (info) => console.log({ type: "LISTENING", port: info.port, tls: secrets.tls !== undefined }),
+  onListen: (info) => console.log({ type: "LISTENING", port: info.port }),
   handler: hono.fetch
 });
-
-// Plain HTTP on port 80 is redirected to HTTPS. Only in production, where TLS is configured.
-if (secrets.tls !== undefined) {
-  Deno.serve({
-		port: 80,
-		onListen: ({port}) => console.log({ type: "LISTENING", port }),
-		handler: (req) => Response.redirect(req.url.replace(/^http:/, "https:"), 301)
-	});
-}

@@ -7,7 +7,7 @@ import * as Sentry from "@sentry/react";
 import args from "~/args.ts";
 
 Sentry.init({
-  dsn: args.betterstack.dsn,
+  dsn: args.betterstack,
   enabled: import.meta.env.MODE === "production"
 });
 

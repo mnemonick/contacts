@@ -38,7 +38,7 @@ const hono = new Hono()
 
 // Errors are sent to Better Stack only in production.
 Sentry.init({
-  dsn: args.betterstack.dsn,
+  dsn: args.betterstack,
   enabled: args.mode === "production"
 });
 

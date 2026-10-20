@@ -5,7 +5,7 @@ export default defineConfig({
   tsconfig: "./deno.json",
   fullyParallel: true,
   use: {
-    baseURL: "http://localhost:2000",
+    baseURL: "http://localhost:3000",
     locale: "en-US",
     actionTimeout: 10_000,
     navigationTimeout: 10_000,

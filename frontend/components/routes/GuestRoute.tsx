@@ -47,6 +47,8 @@ export default function () {
     width: layout.width,
     position: "relative",
     left: layout.left,
+    paddingLeft: layout.desktop ? 20 : 10,
+    paddingRight: layout.desktop ? 20 : 10,
     paddingBottom: layout.desktop ? 150 : 90
   };
 

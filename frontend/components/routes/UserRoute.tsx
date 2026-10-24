@@ -86,8 +86,8 @@ export default function () {
     alignItems: "center",
     position: "relative",
     height: "100%",
-    borderLeft: `1px solid ${colors.border.strong}`,
-    borderRight: `1px solid ${colors.border.strong}`
+    borderLeft: layout.desktop ? `1px solid ${colors.border.strong}` : undefined,
+    borderRight: layout.desktop ? `1px solid ${colors.border.strong}` : undefined
   };
 
   const $content: CSSProperties = {
@@ -145,8 +145,8 @@ export default function () {
     left: layout.left,
     width: layout.width,
     height: "100%",
-    borderLeft: `1px solid ${colors.border.strong}`,
-    borderRight: `1px solid ${colors.border.strong}`,
+    borderLeft: layout.desktop ? `1px solid ${colors.border.strong}` : undefined,
+    borderRight: layout.desktop ? `1px solid ${colors.border.strong}` : undefined,
     fontFamily: "Montserrat",
     fontSize: 24,
     color: colors.text.weak

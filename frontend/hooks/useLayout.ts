@@ -13,7 +13,7 @@ export default function () {
 
   function measure() {
     const mobile = window.innerWidth <= 1024;
-    const width = Math.min(1024, window.innerWidth - (mobile ? 20 : 40));
+    const width = Math.min(1024, window.innerWidth);
     const height = window.innerHeight;
     const left = window.innerWidth / 2 - width / 2;
     const right = left + width;

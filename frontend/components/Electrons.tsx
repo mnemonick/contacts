@@ -76,7 +76,7 @@ export default function ({ side, width }: Props) {
     height: 12,
     marginLeft: -1,
     background: `linear-gradient(to bottom, transparent, ${colors.electron.vertical} 45%, ${colors.electron.vertical} 55%, transparent)`,
-    boxShadow: `0 0 10px ${colors.electron.verticalGlow}`,
+    boxShadow: `0 0 10px ${colors.electron.glow}`,
     animationName: "electron-v"
   };
 
@@ -84,8 +84,8 @@ export default function ({ side, width }: Props) {
     width: 12,
     height: 2,
     marginTop: -1,
-    background: `linear-gradient(to right, transparent, ${colors.electron.horizontal} 45%, ${colors.electron.horizontal} 55%, transparent)`,
-    boxShadow: `0 0 10px ${colors.electron.horizontalGlow}`,
+    background: `linear-gradient(to right, transparent, ${colors.electron.vertical} 45%, ${colors.electron.vertical} 55%, transparent)`,
+    boxShadow: `0 0 10px ${colors.electron.glow}`,
     animationName: "electron-h"
   };
 

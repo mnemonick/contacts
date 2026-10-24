@@ -123,13 +123,21 @@ export default function () {
     borderBottom: `1px solid ${colors.border.weak}`
   };
 
+  // On mobile (360px wide) the text is smaller and cut with an ellipsis instead of spilling into the next column.
   const $cell: CSSProperties = {
     height: "100%",
-    display: "flex",
+    display: layout.mobile ? "block" : "flex",
     fontFamily: "Montserrat",
     alignItems: "center",
     width: "calc(100% / 3)",
-    paddingLeft: 20,
+    minWidth: 0,
+    paddingLeft: layout.mobile ? 10 : 20,
+    paddingRight: layout.mobile ? 10 : undefined,
+    fontSize: layout.mobile ? 14 : undefined,
+    lineHeight: layout.mobile ? "60px" : undefined,
+    overflow: layout.mobile ? "hidden" : undefined,
+    whiteSpace: layout.mobile ? "nowrap" : undefined,
+    textOverflow: layout.mobile ? "ellipsis" : undefined,
     borderRight: `1px solid ${colors.border.weak}`
   };
 
@@ -257,16 +265,7 @@ export default function () {
       fontFamily: "Montserrat",
       alignItems: "center",
       cursor: "pointer",
-      fontSize: 16
-    };
-
-    const $contactCell: CSSProperties = {
-      height: "100%",
-      display: "flex",
-      alignItems: "center",
-      width: "calc(100% / 3)",
-      paddingLeft: 20,
-      borderRight: `1px solid ${colors.border.weak}`
+      fontSize: layout.mobile ? 14 : 16
     };
 
     return (
@@ -277,9 +276,9 @@ export default function () {
         onMouseMove={(event) => (event.currentTarget.style.backgroundColor = colors.button.hover)}
         onMouseLeave={(event) => (event.currentTarget.style.backgroundColor = "transparent")}
       >
-        <name style={$contactCell}>{contact.name}</name>
-        <email style={$contactCell}>{contact.email}</email>
-        <comment style={{ ...$contactCell, borderRight: undefined }}>{contact.comment || "-"}</comment>
+        <name style={$cell}>{contact.name}</name>
+        <email style={$cell}>{contact.email}</email>
+        <comment style={{ ...$cell, borderRight: undefined }}>{contact.comment || "-"}</comment>
       </contact>
     );
   }

@@ -8,10 +8,8 @@ export default {
     end: "oklch(0% 0 0)"
   },
   electron: {
-    vertical: "oklch(76.35% 0.126 249.79 / 0.55)",
-    verticalGlow: "oklch(64.33% 0.195 254.02 / 0.22)",
-    horizontal: "oklch(76.35% 0.126 249.79 / 0.45)",
-    horizontalGlow: "oklch(64.33% 0.195 254.02 / 0.18)"
+    vertical: "oklch(75% 0.125 250 / 0.55)",
+    glow: "oklch(65% 0.200 255 / 0.22)"
   },
   term: {
     text: "oklch(70% 0.14 255)",

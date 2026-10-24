@@ -95,8 +95,8 @@ export default function () {
     width: layout.width,
     minHeight: "100%",
     left: layout.left,
-    borderLeft: `1px solid ${colors.border.strong}`,
-    borderRight: `1px solid ${colors.border.strong}`
+    borderLeft: layout.desktop ? `1px solid ${colors.border.strong}` : undefined,
+    borderRight: layout.desktop ? `1px solid ${colors.border.strong}` : undefined
   };
 
   const $routeBody: CSSProperties = {

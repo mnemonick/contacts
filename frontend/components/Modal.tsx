@@ -11,9 +11,6 @@ interface Props {
   onClose?: () => void;
 }
 
-// Like Chrome, the modal sits in the visible area above the keyboard. On iOS the keyboard shrinks the visual viewport
-// but not the layout viewport. iOS can keep a stale offsetTop after the keyboard closes, so the offset is used only
-// while a text field is focused.
 function readViewport() {
   const visual = window.visualViewport;
   const { activeElement } = document;
@@ -50,6 +47,9 @@ export default function ({ name, onClose, children }: Props) {
     border: `1px solid ${colors.border.strong}`,
     boxShadow: colors.modal.shadow,
     marginBottom: layout.desktop ? "" : 20,
+    maxHeight: layout.desktop ? "calc(100% - 40px)" : "calc(100% - 20px)",
+    overflowY: "auto",
+    overscrollBehavior: "contain",
     transition: `transform ${SLIDE}ms linear`,
     transform: "translateY(20px)"
   };
@@ -59,15 +59,27 @@ export default function ({ name, onClose, children }: Props) {
     return () => window.removeEventListener("keydown", onKeyDown);
   });
 
-  // Changing the styles after mount starts the enter transition.
   useEffect(() => {
     modalRef.current!.style.opacity = "1";
     contentRef.current!.style.transform = "";
   }, []);
 
   useEffect(() => {
+    const modal = modalRef.current!;
+
+    function onTouchMove(event: TouchEvent) {
+      const content = contentRef.current!;
+      const scrollable = content.scrollHeight > content.clientHeight;
+      const allowed = scrollable && content.contains(event.target as Node);
+      if (!allowed) event.preventDefault();
+    }
+
+    modal.addEventListener("touchmove", onTouchMove, { passive: false });
+    return () => modal.removeEventListener("touchmove", onTouchMove);
+  }, []);
+
+  useEffect(() => {
     const update = () => setViewport(readViewport());
-    // focusout reports the old activeElement, so the update waits one tick.
     const later = () => setTimeout(update);
     const visual = window.visualViewport;
 

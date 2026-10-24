@@ -1,5 +1,6 @@
 import { type ComponentProps, createElement, type CSSProperties, useEffect, useRef, useState } from "react";
 import colors from "#/utils/colors.ts";
+import useLayout from "#/hooks/useLayout.ts";
 import { TEXT_MAX } from "%/utils/validate.ts";
 
 const DIRTY_DELAY = 4000;
@@ -15,6 +16,7 @@ type Props = Omit<ComponentProps<"input">, "name" | "onChange" | "value" | "styl
 };
 
 export default function ({ name, onChange, value, onDirty, icon, invalid, style, ...rest }: Props) {
+  const layout = useLayout();
   const [dirty, setDirty] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
@@ -29,7 +31,7 @@ export default function ({ name, onChange, value, onDirty, icon, invalid, style,
     border: "none",
     height: "100%",
     width: "calc(100% - 64px)",
-    fontSize: 20,
+    fontSize: layout.mobile ? 18 : 20,
     background: "transparent",
     color: invalid ? colors.text.error : colors.text.strong
   };

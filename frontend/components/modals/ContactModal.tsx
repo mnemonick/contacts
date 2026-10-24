@@ -4,6 +4,7 @@ import Modal from "#/components/Modal.tsx";
 import Loader from "#/components/Loader.tsx";
 import Button from "#/components/Button.tsx";
 import colors from "#/utils/colors.ts";
+import useLayout from "#/hooks/useLayout.ts";
 import translate from "#/utils/translate.ts";
 import useUserStore from "#/stores/useUserStore.ts";
 import client from "#/utils/client.ts";
@@ -22,6 +23,7 @@ interface Props {
 }
 
 export default function ({ contact, onClose }: Props) {
+  const layout = useLayout();
   const user = useUserStore((store) => store.user)!;
   const addContact = useUserStore((store) => store.addContact);
   const removeContact = useUserStore((store) => store.removeContact);
@@ -54,7 +56,7 @@ export default function ({ contact, onClose }: Props) {
     borderBottom: `1px solid ${colors.border.medium}`,
     fontFamily: "Montserrat, sans-serif",
     fontWeight: 500,
-    fontSize: 20,
+    fontSize: layout.mobile ? 18 : 20,
     textAlign: "center",
     height: 60,
     lineHeight: "60px",
@@ -71,7 +73,7 @@ export default function ({ contact, onClose }: Props) {
     width: "100%",
     height: 60,
     fontFamily: "Montserrat",
-    fontSize: "24px"
+    fontSize: layout.mobile ? 18 : 24
   };
 
   const $buttons: CSSProperties = {
@@ -97,7 +99,7 @@ export default function ({ contact, onClose }: Props) {
     justifyContent: "center",
     color: colors.text.error,
     fontFamily: "Montserrat",
-    fontSize: "16px",
+    fontSize: layout.mobile ? 14 : 16,
     textAlign: "center",
     padding: 20,
     borderBottomLeftRadius: 20,

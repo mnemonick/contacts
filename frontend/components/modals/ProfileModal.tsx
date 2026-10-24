@@ -21,7 +21,7 @@ export default function ({ onClose }: Props) {
     borderBottom: `1px solid ${colors.border.medium}`,
     fontFamily: "Montserrat, sans-serif",
     fontWeight: 500,
-    fontSize: 20,
+    fontSize: layout.mobile ? 18 : 20,
     textAlign: "center",
     height: 60,
     lineHeight: "60px",

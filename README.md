@@ -17,10 +17,10 @@ The business logic is intentionally simple: users register and keep a list of co
 
 ## Structure
 
-- `frontend/` — `React` app. Components in `components/`, API calls in `utils/client.ts`.
-- `backend/` — `Hono` API. Handlers in `handlers/`, migrations in `migrations/`.
-- `sender/` — static file server. The frontend is built into it.
-- `tests/` — `Playwright` E2E tests in `specs/`.
+- `frontend/` - `React` app. Components in `components/`, API calls in `utils/client.ts`.
+- `backend/` - `Hono` API. Handlers in `handlers/`, migrations in `migrations/`.
+- `sender/` - static file server. The frontend is built into it.
+- `tests/` - `Playwright` E2E tests in `specs/`.
 
 ## Running locally
 

@@ -68,8 +68,8 @@ export default function () {
     borderBottom: `1px solid ${colors.border.strong}`,
     borderLeft: `1px solid ${colors.border.strong}`,
     borderRadius: 10,
-    marginTop: layout.desktop ? 40 : 20,
-    marginBottom: layout.desktop ? 40 : 20,
+    marginTop: layout.desktop ? 40 : 10,
+    marginBottom: layout.desktop ? 40 : 10,
     marginLeft: layout.desktop ? 0 : 10,
     marginRight: layout.desktop ? 0 : 10,
     background: colors.section,
@@ -89,7 +89,6 @@ export default function () {
     }
   });
 
-  // Sections fade in as they scroll into view. Mobile starts earlier, so less scrolling is needed.
   useEffect(() => {
     const body = bodyRef.current;
     if (!body) return;
@@ -130,7 +129,6 @@ export default function () {
   return (
     <route style={$route}>
       <route-header style={$routeHeader}>{m.header}</route-header>
-
       <route-body ref={bodyRef} style={$routeBody}>
         <route-content style={$routeContent}>
           {layout.desktop ? <Electrons side="left" width={layout.left} /> : null}
@@ -140,6 +138,7 @@ export default function () {
             <section style={$section}>
               <heading style={$heading}>{m.intro.heading}</heading>
               <paragraph style={$paragraph}>{m.intro.goal}</paragraph>
+              <paragraph style={$paragraph}>{m.intro.criterion}</paragraph>
               <paragraph style={$paragraph}>{m.intro.approach}</paragraph>
             </section>
 
@@ -165,15 +164,16 @@ export default function () {
               <paragraph style={$paragraph}>{m.framework.angular}</paragraph>
               <paragraph style={$paragraph}>{m.framework.vue}</paragraph>
               <paragraph style={$paragraph}>{m.framework.react}</paragraph>
+              <paragraph style={$paragraph}>{m.framework.choice}</paragraph>
             </section>
 
             <section style={$section}>
               <heading style={$heading}>{m.bundler.heading}</heading>
               <paragraph style={$paragraph}>{m.bundler.needs}</paragraph>
-              <paragraph style={$paragraph}>{m.bundler.deno}</paragraph>
               <paragraph style={$paragraph}>{m.bundler.webpack}</paragraph>
               <paragraph style={$paragraph}>{m.bundler.rolldown}</paragraph>
               <paragraph style={$paragraph}>{m.bundler.vite}</paragraph>
+              <paragraph style={$paragraph}>{m.bundler.choice}</paragraph>
             </section>
 
             <section style={$section}>
@@ -184,7 +184,6 @@ export default function () {
               <paragraph style={$paragraph}>{m.styles.emotion}</paragraph>
               <paragraph style={$paragraph}>{m.styles.inline}</paragraph>
               <paragraph style={$paragraph}>{m.styles.limits}</paragraph>
-              <paragraph style={$paragraph}>{m.styles.tags}</paragraph>
             </section>
 
             <section style={$section}>
@@ -208,17 +207,16 @@ export default function () {
               <paragraph style={$paragraph}>{m.backend.needs}</paragraph>
               <paragraph style={$paragraph}>{m.backend.specialized}</paragraph>
               <paragraph style={$paragraph}>{m.backend.nodejs}</paragraph>
-              <paragraph style={$paragraph}>{m.backend.bun}</paragraph>
-              <paragraph style={$paragraph}>{m.backend.deno}</paragraph>
+              <paragraph style={$paragraph}>{m.backend.bunDetails}</paragraph>
             </section>
 
             <section style={$section}>
               <heading style={$heading}>{m.backendFramework.heading}</heading>
               <paragraph style={$paragraph}>{m.backendFramework.needs}</paragraph>
               <paragraph style={$paragraph}>{m.backendFramework.express}</paragraph>
-              <paragraph style={$paragraph}>{m.backendFramework.fastify}</paragraph>
               <paragraph style={$paragraph}>{m.backendFramework.oak}</paragraph>
               <paragraph style={$paragraph}>{m.backendFramework.hono}</paragraph>
+              <paragraph style={$paragraph}>{m.backendFramework.choice}</paragraph>
             </section>
 
             <section style={$section}>
@@ -256,7 +254,6 @@ export default function () {
             <section style={$section}>
               <heading style={$heading}>{m.lint.heading}</heading>
               <paragraph style={$paragraph}>{m.lint.needs}</paragraph>
-              <paragraph style={$paragraph}>{m.lint.deno}</paragraph>
               <paragraph style={$paragraph}>{m.lint.eslint}</paragraph>
               <paragraph style={$paragraph}>{m.lint.biome}</paragraph>
             </section>
@@ -308,12 +305,16 @@ const m = translate({
   intro: {
     heading: ["Introduction", "Вступление"],
     goal: [
-      "The goal of the project is to show how I write code, so the business logic is intentionally simple. Users register and keep a list of contacts. Contacts can be created, edited and deleted. Each contact has a name, email and comment. The main criterion for choosing technologies is simplicity and minimalism, and each section below has the requirements, the options and the choice.",
-      "Цель проекта - показать, как я пишу код, поэтому бизнес-логика намеренно простая. Пользователи регистрируются и ведут список контактов. Контакты можно создавать, редактировать и удалять. В каждом контакте есть имя, почта и комментарий. Главный критерий выбора технологий - простота и минимализм, и в каждом разделе ниже есть требования, варианты и выбор."
+      "The goal of the project is to show how I write code, so the business logic is intentionally simple. Users register and keep a list of contacts. Contacts can be created, edited and deleted. Each contact has a name, email and comment.",
+      "Цель проекта - показать, как я пишу код, поэтому бизнес-логика намеренно простая. Пользователи регистрируются и ведут список контактов. Контакты можно создавать, редактировать и удалять. В каждом контакте есть имя, почта и комментарий."
+    ],
+    criterion: [
+      "The main criterion for choosing technologies is simplicity and minimalism, and each section below has the requirements, the options and the choice.",
+      "Главный критерий выбора технологий - простота и минимализм, и в каждом разделе ниже есть требования, варианты и выбор."
     ],
     approach: [
-      'Stack - <term>React</term>, <term>Bun</term>, <term>Hono</term>, <term>PostgreSQL</term>. I wrote the architecture and code myself. AI was used only for learning and proofreading. The source code is available on GitHub: <a href="https://github.com/mnemonick/contacts" target="_blank">github.com/mnemonick/contacts</a>.',
-      'Стек - <term>React</term>, <term>Bun</term>, <term>Hono</term>, <term>PostgreSQL</term>. Архитектура и код - мои. ИИ использовался только для обучения и пруф-ридинга. Исходный код доступен на GitHub: <a href="https://github.com/mnemonick/contacts" target="_blank">github.com/mnemonick/contacts</a>.'
+      'I wrote the architecture and code myself. AI was used only for learning and proofreading. The source code is available on GitHub: <a href="https://github.com/mnemonick/contacts" target="_blank">github.com/mnemonick/contacts</a>.',
+      'Архитектура и код - мои. ИИ использовался только для обучения и пруф-ридинга. Исходный код доступен на GitHub: <a href="https://github.com/mnemonick/contacts" target="_blank">github.com/mnemonick/contacts</a>.'
     ]
   },
   structure: {
@@ -357,20 +358,24 @@ const m = translate({
   framework: {
     heading: ["Frontend framework", "Frontend фреймворк"],
     needs: [
-      "My requirements for a <term>Frontend</term> framework: a component in one file, markup in <term>TypeScript</term> (<term>JSX</term>) with type checking, a large ecosystem. I considered the following options:",
-      "Мои требования к <term>Frontend</term> фреймворку: компонент в одном файле, разметка на <term>TypeScript</term> (<term>JSX</term>) с проверкой типов, большая экосистема. Рассматривал следующие варианты:"
+      "My most important requirement for a <term>Frontend</term> framework is that all the component logic lives in one file, not spread across several files (as is usually the case with <term>MVC</term>). I considered the following options:",
+      "Мое самое главное требование к <term>Frontend</term> фреймворку: вся логика компонента должна находиться в одном файле, а не размазана по нескольким файлам (как это обычно бывает в <term>MVC</term>). Рассматривал следующие варианты:"
     ],
     angular: [
-      "<term>Angular</term> - by default a component is split into three files: a class, an <term>HTML</term> template and styles. I prefer one file. Templates also have their own syntax. All technologies are built into the framework, so you do not need to assemble them, but you lose low-level control.",
-      "<term>Angular</term> - по умолчанию компонент разделен на три файла: класс, <term>HTML</term>-шаблон и стили. Я предпочитаю один файл. А еще у шаблонов свой синтаксис. Все технологии встроены в фреймворк, поэтому их не нужно собирать по частям, но теряется низкоуровневый контроль."
+      "<term>Angular</term> - by default a component is split into three files: a class, an <term>HTML</term> template and styles. I prefer one file.",
+      "<term>Angular</term> - по умолчанию компонент разделен на три файла: класс, <term>HTML</term>-шаблон и стили. Я предпочитаю один файл."
     ],
     vue: [
       "<term>Vue</term> - a component is written in one <term>.vue</term> file. But templates have their own language (<term>v-if</term>, <term>v-for</term>), and this file format needs a separate compiler.",
       "<term>Vue</term> - компонент пишется в одном файле <term>.vue</term>. Но у шаблонов свой язык (<term>v-if</term>, <term>v-for</term>), а для этого формата файлов нужен отдельный компилятор."
     ],
+    choice: [
+      "I settled on <term>React</term> - it meets all the requirements, and its ecosystem is the largest.",
+      "Остановился на <term>React</term> - он подходит под все требования, а экосистема у него самая большая."
+    ],
     react: [
-      "In <term>React</term> a component is a regular <term>TypeScript</term> function with <term>JSX</term>, without a separate template language. The API is small - components and hooks. I settled on <term>React</term> - it meets all the requirements, and its ecosystem is the largest.",
-      "В <term>React</term> компонент - это обычная функция на <term>TypeScript</term> с <term>JSX</term>, без своего языка шаблонов. API маленький - компоненты и хуки. Остановился на <term>React</term> - он подходит под все требования, а экосистема у него самая большая."
+      "In <term>React</term> a component is a regular <term>TypeScript</term> function with <term>JSX</term>, without a separate template language. The API is small - components and hooks.",
+      "В <term>React</term> компонент - это обычная функция на <term>TypeScript</term> с <term>JSX</term>, без своего языка шаблонов. API маленький - компоненты и хуки."
     ]
   },
   bundler: {
@@ -378,10 +383,6 @@ const m = translate({
     needs: [
       "My requirements for a bundler - <term>TypeScript</term> integration, minification, <term>SourceMap</term> support.",
       "Мои требования к бандлеру - интеграция с <term>TypeScript</term>, минификация, поддержка <term>SourceMap</term>."
-    ],
-    deno: [
-      "<term>bun bundle</term> - built into <term>Bun</term>. It is the most minimalistic option, but it is not functional enough.",
-      "<term>bun bundle</term> - встроен в <term>Bun</term>. Это самый минималистичный вариант, но он недостаточно функциональный."
     ],
     webpack: [
       "<term>Webpack</term> - used to be very popular. But it needs a separate loader for <term>TypeScript</term>. Its config is several times longer, and it is written in <term>JavaScript</term>, so it is slower.",
@@ -392,8 +393,12 @@ const m = translate({
       "<term>Rolldown</term> - бандлер на <term>Rust</term>. Он совместим с <term>Rollup</term>. С 8 версии <term>Vite</term> работает поверх него."
     ],
     vite: [
-      "<term>Vite</term> - the same <term>Rolldown</term>, but with ready-made settings for <term>TypeScript</term>, minification and <term>SourceMap</term>. In the end I took <term>Vite</term>. It does everything I need, and its config is the most concise.",
-      "<term>Vite</term> - это тот же <term>Rolldown</term>, но с готовыми настройками для <term>TypeScript</term>, минификации и <term>SourceMap</term>. В итоге я взял <term>Vite</term>. Он делает все, что мне нужно, и конфиг у него самый лаконичный."
+      "<term>Vite</term> - the same <term>Rolldown</term>, but with ready-made settings for <term>TypeScript</term>, minification and <term>SourceMap</term>.",
+      "<term>Vite</term> - это тот же <term>Rolldown</term>, но с готовыми настройками для <term>TypeScript</term>, минификации и <term>SourceMap</term>."
+    ],
+    choice: [
+      "In the end I took <term>Vite</term>. It does everything I need, and its config is the most concise.",
+      "В итоге я взял <term>Vite</term>. Он делает все, что мне нужно, и конфиг у него самый лаконичный."
     ]
   },
   styles: {
@@ -419,12 +424,8 @@ const m = translate({
       "<term>Inline</term> - стили пишутся прямо на элементах. Типы дает <term>CSSProperties</term>. Стили могут ссылаться на свойства друг друга."
     ],
     limits: [
-      "Inline styles have no <term>:hover</term>, <term>@media</term>, <term>@keyframes</term> or pseudo-elements. Responsiveness is done with the <term>useLayout</term> hook. Hover is done with event handlers. Animations and the scrollbar are described in one global <term>Styles</term> component. In practice this is enough, so I settled on inline styles.",
-      "У inline-стилей нет <term>:hover</term>, <term>@media</term>, <term>@keyframes</term> и псевдоэлементов. Адаптивность я делаю через хук <term>useLayout</term>. Hover - через обработчики событий. Анимации и скроллбар описаны в одном глобальном компоненте <term>Styles</term>. На практике этого хватает, поэтому остановился на inline-стилях."
-    ],
-    tags: [
-      "Instead of <term>div</term> I use custom tags. The tag name is the role of the layer: <term>section</term>, <term>heading</term>, <term>paragraph</term>. The code shows right away what each layer does, and <term>E2E</term> tests find layers by tag name.",
-      "Вместо <term>div</term> я использую кастомные теги. Имя тега - это роль слоя: <term>section</term>, <term>heading</term>, <term>paragraph</term>. По коду сразу видно, что делает каждый слой, а <term>E2E</term>-тесты находят слои по имени тега."
+      "In the end I settled on <term>inline</term> styles. Responsiveness is done with the <term>useLayout</term> hook. Hover is done with event handlers. Animations are described in one global <term>Styles</term> component. Instead of <term>div</term> I use custom tags. The tag name is the role of the layer: <term>section</term>, <term>heading</term>, <term>paragraph</term>. The code shows right away what each layer does, and <term>E2E</term> tests find layers by tag name. This approach has drawbacks too: <term>inline</term> styles have no <term>:hover</term>, <term>@media</term>, <term>@keyframes</term> or pseudo-elements, but the pros outweigh the cons.",
+      "В итоге я остановился на <term>inline</term>-стилях. Адаптивность я делаю через хук <term>useLayout</term>. Hover - через обработчики событий. Анимации описаны в одном глобальном компоненте <term>Styles</term>. Вместо <term>div</term> я использую кастомные теги. Имя тега - это роль слоя: <term>section</term>, <term>heading</term>, <term>paragraph</term>. По коду сразу видно, что делает каждый слой, а <term>E2E</term>-тесты находят слои по имени тега. У этого подхода есть и недостатки: у <term>inline</term>-стилей нет <term>:hover</term>, <term>@media</term>, <term>@keyframes</term> и псевдоэлементов, но плюсы перевешивают минусы."
     ]
   },
   routing: {
@@ -449,8 +450,8 @@ const m = translate({
   state: {
     heading: ["State management", "Управление состоянием"],
     needs: [
-      "For state I need the most concise library possible.",
-      "Для состояния нужна максимально лаконичная библиотека."
+      "My main requirement for a state management library is minimalism and a concise API.",
+      "Мое самое главное требование для библиотеки по управлению состоянием - минималистичность и лаконичный API."
     ],
     redux: [
       "<term>Redux</term> - even with <term>Redux Toolkit</term> it needs slices, a <term>Provider</term> and dispatching actions. That is too much boilerplate.",
@@ -468,66 +469,62 @@ const m = translate({
   backend: {
     heading: ["Backend language", "Backend язык"],
     needs: [
-      "My requirements for the <term>Backend</term> - simplicity and minimalism, and ideally the same tools as on the <term>Frontend</term>. I considered the following options:",
-      "Мои требования к - простота и минимализм, а в идеале - те же инструменты, что и на <term>Frontend</term>. Рассматривал следующие варианты:"
+      "My requirements for the <term>Backend</term> language - simplicity and minimalism, and ideally the same tools as on the <term>Frontend</term>. I considered the following options:",
+      "Мои требования к <term>Backend</term> языку - простота и минимализм, а в идеале - те же инструменты, что и на <term>Frontend</term>. Рассматривал следующие варианты:"
     ],
     specialized: [
       "<term>Go</term> and <term>Rust</term> - languages for the backend. They are faster and use less memory. But language performance is generally not a bottleneck, and <term>Frontend</term> and <term>Backend</term> would need completely different tools.",
       "<term>Go</term> и <term>Rust</term> - языки для бэкенда. Они быстрее и экономнее по памяти. Но производительность языка в целом не узкое место, а <term>Frontend</term> и <term>Backend</term> тогда пришлось бы разрабатывать совершенно разными инструментами."
     ],
     nodejs: [
-      "<term>Node.js</term> - <term>JavaScript</term> on the server. To be honest, <term>JavaScript</term> is not the best language, and <term>TypeScript</term> only partially solves this problem. But <term>Frontend</term> and <term>Backend</term> use the same tools.",
-      "<term>Node.js</term> - это <term>JavaScript</term> на сервере. Честно говоря, <term>JavaScript</term> - не самый лучший язык, и <term>TypeScript</term> только частично решает эту проблему. Зато <term>Frontend</term> и <term>Backend</term> разрабатываются одними инструментами."
+      "<term>Node.js</term> - <term>JavaScript</term> on the server. To be honest, <term>JavaScript</term> is not the best language, and <term>TypeScript</term> only partially solves this problem. But <term>Frontend</term> and <term>Backend</term> are developed with the same tools.",
+      "<term>Node.js</term> - это <term>JavaScript</term> на сервере. Честно говоря, <term>JavaScript</term> - не самый лучший язык, и <term>TypeScript</term> только частично решает эту проблему. Зато <term>Frontend</term> и <term>Backend</term> разрабатываются одними и теми же инструментами."
     ],
-    bun: [
-      "<term>Bun</term> - a fast runtime compatible with <term>Node.js</term>, but without a permission system.",
-      "<term>Bun</term> - быстрый рантайм, он совместим с <term>Node.js</term>, но системы разрешений в нем нет."
-    ],
-    deno: [
-      "<term>Bun</term> - a separate runtime by the author of <term>Node.js</term>. It is written from scratch in <term>Rust</term>. Its main advantage is a more intuitive standard library: the main methods are on the global <term>Bun</term> object, and everything else is in <term>@std</term>. It runs <term>TypeScript</term> without a build step. It checks types itself (<term>bun check</term>). It also supports workspaces and permission sets (<term>--permission-set</term>).",
-      "<term>Bun</term> - отдельный рантайм от автора <term>Node.js</term>. Он написан с нуля на <term>Rust</term>. Главный плюс - более интуитивная стандартная библиотека: основные методы находятся в глобальном объекте <term>Bun</term>, а все остальное вынесено в <term>@std</term>. Он запускает <term>TypeScript</term> без сборки. Типы он проверяет сам (<term>bun check</term>). Еще он поддерживает workspace и наборы разрешений (<term>--permission-set</term>)."
+    bunDetails: [
+      "<term>Bun</term> - a separate runtime by the author of <term>Node.js</term>. It is written from scratch in <term>Rust</term>. Its main advantage is a more intuitive standard library: the main methods are on the global <term>Bun</term> object.",
+      "<term>Bun</term> - отдельный рантайм от автора <term>Node.js</term>. Он написан с нуля на <term>Rust</term>. Главный плюс - более интуитивная стандартная библиотека: основные методы находятся в глобальном объекте <term>Bun</term>."
     ]
   },
   backendFramework: {
     heading: ["Backend framework", "Backend фреймворк"],
     needs: [
-      "From a backend framework I need routing, ready-made middleware, and typed requests and responses.",
-      "От Backend фреймворка мне нужны роутинг, готовые middleware и типизация запросов и ответов."
+      "From a <term>backend</term> framework I need routing, ready-made middleware, and typed requests and responses.",
+      "От <term>Backend</term> фреймворка мне нужны роутинг, готовые middleware и типизация запросов и ответов."
     ],
     express: [
       "<term>Express</term> - the most popular one. But it is made for <term>Node.js</term>, its types come as a separate package, and it has no typed client.",
       "<term>Express</term> - самый популярный. Но он сделан под <term>Node.js</term>, типы для него идут отдельным пакетом, и у него нет типизированного клиента."
-    ],
-    fastify: [
-      "<term>Fastify</term> - faster than <term>Express</term>. But it is also made for <term>Node.js</term>. It is built around its own plugins and schemas.",
-      "<term>Fastify</term> - быстрее <term>Express</term>. Но он тоже сделан под <term>Node.js</term>. И он построен вокруг своих плагинов и схем."
     ],
     oak: [
       "<term>Oak</term> - made for <term>Bun</term>, but without a typed client.",
       "<term>Oak</term> - сделан под <term>Bun</term>, но типизированного клиента у него нет."
     ],
     hono: [
-      "<term>Hono</term> - built on web standards (<term>Request</term>, <term>Response</term>), so it works in <term>Bun</term> without adapters. It has ready-made middleware: <term>cors</term>, <term>bodyLimit</term>, <term>timeout</term>, <term>secureHeaders</term>. It also has a typed client. The <term>Frontend</term> calls the <term>Backend</term> with types from the handlers. <term>Hono</term> covers all the requirements, so I chose it.",
-      "<term>Hono</term> - построен на веб-стандартах (<term>Request</term>, <term>Response</term>), поэтому он работает в <term>Bun</term> без адаптеров. У него есть готовые middleware: <term>cors</term>, <term>bodyLimit</term>, <term>timeout</term>, <term>secureHeaders</term>. Еще у него есть типизированный клиент. <term>Frontend</term> вызывает <term>Backend</term> с типами из хендлеров. <term>Hono</term> закрывает все требования, поэтому выбрал его."
+      "<term>Hono</term> - built on web standards (<term>Request</term>, <term>Response</term>), so it works in <term>Bun</term> without adapters. It has ready-made middleware: <term>cors</term>, <term>bodyLimit</term>, <term>timeout</term>, <term>secureHeaders</term>. It also has a typed client.",
+      "<term>Hono</term> - построен на веб-стандартах (<term>Request</term>, <term>Response</term>), поэтому он работает в <term>Bun</term> без адаптеров. У него есть готовые middleware: <term>cors</term>, <term>bodyLimit</term>, <term>timeout</term>, <term>secureHeaders</term>. Еще у него есть типизированный клиент."
+    ],
+    choice: [
+      "<term>Hono</term> covers all the requirements, so I chose it.",
+      "<term>Hono</term> закрывает все требования, поэтому выбрал его."
     ]
   },
   database: {
     heading: ["Database", "База данных"],
     needs: [
-      "My requirements for a database: strict typing, so the tool warns me if I am doing something wrong. I considered the following options:",
-      "Мои требования к базе данных: строгая типизация, чтобы инструмент подсказывал, если я делаю что-то не так. Рассматривал следующие варианты:"
+      "My main requirement for a database is strict typing. I like it when the tool tells me if I am doing something wrong. I considered the following options:",
+      "Мое самое главное требование к базе данных - строгая типизация. Мне нравится, когда инструмент подсказывает, если я делаю что-то не так. Рассматривал следующие варианты:"
     ],
     mongodb: [
-      "<term>MongoDB</term> - <term>JavaScript</term> integrates better with its <term>JSON</term> structures. But it has no strict typing.",
-      "<term>MongoDB</term> - <term>JavaScript</term> лучше интегрируется с ее <term>JSON</term>-структурами. Но в ней нет строгой типизации."
+      "<term>MongoDB</term> - <term>JavaScript</term> integrates better with its <term>JSON</term> structures. But MongoDB has no strict typing.",
+      "<term>MongoDB</term> - <term>JavaScript</term> лучше интегрируется с ее <term>JSON</term>-структурами. Но в MongoDB нет строгой типизации."
     ],
     postgresql: [
-      "<term>PostgreSQL</term> - a relational database with strict typing. The choice here was simple.",
-      "<term>PostgreSQL</term> - реляционная база данных со строгой типизацией. Здесь выбор был простой."
+      "<term>PostgreSQL</term> - a relational database with strict typing.",
+      "<term>PostgreSQL</term> - реляционная база данных со строгой типизацией."
     ],
     orm: [
-      "Instead of an <term>ORM</term> (for example <term>Prisma</term> or <term>Drizzle</term>) I use the <term>postgres</term> module. Queries are written in plain <term>SQL</term>. Parameters go to the database separately from the query text, so <term>SQL</term> injections are impossible. I prefer low-level control over queries. The downside is that result types are not inferred from the schema and have to be specified manually.",
-      "Вместо <term>ORM</term> (например, <term>Prisma</term> или <term>Drizzle</term>) я использую модуль <term>postgres</term>. Запросы пишутся на чистом <term>SQL</term>. Параметры передаются в базу отдельно от текста запроса, поэтому <term>SQL</term>-инъекции невозможны. Я предпочитаю низкоуровневый контроль над запросами. Минус в том, что типы результатов не выводятся из схемы, и их приходится указывать вручную."
+      "Instead of an <term>ORM</term> (for example <term>Prisma</term> or <term>Drizzle</term>) I use the <term>postgres</term> module. Queries are written in plain <term>SQL</term>. Parameters go to the database separately from the query text, so <term>SQL</term> injections are impossible. I prefer low-level control over queries. The downside is that result types are not inferred from the schema and have to be specified manually, but I can live with it.",
+      "Вместо <term>ORM</term> (например, <term>Prisma</term> или <term>Drizzle</term>) я использую модуль <term>postgres</term>. Запросы пишутся на чистом <term>SQL</term>. Параметры передаются в базу отдельно от текста запроса, поэтому <term>SQL</term>-инъекции невозможны. Я предпочитаю низкоуровневый контроль над запросами. Минус в том, что типы результатов не выводятся из схемы, и их приходится указывать вручную, но с этим можно жить."
     ],
     migrations: [
       "Migrations are applied by the <term>postgres-shift</term> library from the author of the <term>postgres</term> module. Migrations are plain <term>SQL</term> files. All new ones run in one transaction when the <term>Backend</term> starts. If one fails, none are applied.",
@@ -545,8 +542,8 @@ const m = translate({
       "<term>Nginx</term> - стандарт индустрии. Но это отдельная программа со своим языком конфигурации (<term>DSL</term>), и ее нужно ставить и настраивать отдельно от проекта."
     ],
     caddy: [
-      "<term>Caddy</term> - a more modern alternative to <term>Nginx</term>. It obtains and renews <term>HTTPS</term> certificates by itself. But it is also a separate tool with its own <term>DSL</term> (<term>Caddyfile</term>).",
-      "<term>Caddy</term> - более современная альтернатива <term>Nginx</term>. Она сама получает и продлевает <term>HTTPS</term>-сертификаты. Но это тоже отдельный инструмент со своим <term>DSL</term> (<term>Caddyfile</term>)."
+      "<term>Caddy</term> - a more modern alternative to <term>Nginx</term>. It obtains and renews <term>HTTPS</term> certificates by itself. But it is also a separate tool with its own <term>DSL</term>.",
+      "<term>Caddy</term> - более современная альтернатива <term>Nginx</term>. Она сама получает и продлевает <term>HTTPS</term>-сертификаты. Но это тоже отдельный инструмент со своим <term>DSL</term>."
     ],
     hono: [
       "My own web server on <term>Hono</term> - the <term>Backend</term> already runs on <term>Hono</term>, so no new tool was needed. It is about 100 lines of <term>TypeScript</term>. The logic is in a regular language, not in a <term>DSL</term>. So in the end I did without a separate web server.",
@@ -568,23 +565,23 @@ const m = translate({
       "<term>tRPC</term> - типизированный <term>RPC</term> между <term>Frontend</term> и <term>Backend</term>. Но это отдельная библиотека со своими роутерами."
     ],
     rpc: [
-      "<term>RPC</term> over <term>HTTP</term> on <term>Hono</term> - this is not classic <term>REST</term>, because endpoints are named with verbs (<term>/get-user</term>, <term>/create-contact</term>), not resources. The <term>API</term> is typed via the <term>Hono</term> client. I settled on this option. The typing is the same as in <term>tRPC</term>.",
-      "<term>RPC</term> поверх <term>HTTP</term> на <term>Hono</term> - это не классический <term>REST</term>, потому что эндпоинты названы глаголами (<term>/get-user</term>, <term>/create-contact</term>), а не ресурсами. <term>API</term> типизируется через клиент <term>Hono</term>. На этом варианте и остановился. Типизация та же, что у <term>tRPC</term>."
+      "<term>RPC</term> over <term>HTTP</term> on <term>Hono</term> - this is not quite classic <term>REST</term>, because endpoints are named with verbs (<term>/get-user</term>, <term>/create-contact</term>), not resources, but in my opinion it is much more convenient.",
+      "<term>RPC</term> поверх <term>HTTP</term> на <term>Hono</term> - это не совсем классический <term>REST</term>, потому что эндпоинты названы глаголами (<term>/get-user</term>, <term>/create-contact</term>), а не ресурсами, но как по мне так намного удобнее."
     ]
   },
   tests: {
     heading: ["Tests", "Тесты"],
     e2e: [
-      "I am a proponent of <term>E2E</term> testing. Such a test checks what the user sees. It does not depend on the implementation. So it does not break during refactoring. Unit and integration tests catch far fewer bugs, so I gave them up.",
-      "Я сторонник <term>E2E</term>-тестирования. Такой тест проверяет то, что видит пользователь. Он не зависит от реализации. Поэтому он не ломается при рефакторинге. Unit и интеграционные тесты ловят намного меньше багов, поэтому я от них отказался."
+      "I am a proponent of <term>E2E</term> testing. I am a huge fan of <term>E2E</term> testing. Such a test checks what the user sees. It does not depend on the implementation. So it does not break during refactoring. Unit and integration tests catch far fewer bugs.",
+      "Я сторонник <term>E2E</term>-тестирования. Я огромный фанат <term>E2E</term>-тестирования. Такой тест проверяет то, что видит пользователь. Он не зависит от реализации. Поэтому он не ломается при рефакторинге. Unit и интеграционные тесты ловят намного меньше багов."
     ],
     cypress: [
       "<term>Cypress</term> - tests run inside the browser, so working with several tabs and domains is harder. Some features are paid.",
       "<term>Cypress</term> - тесты выполняются внутри браузера, поэтому сложнее работать с несколькими вкладками и доменами. Часть функций платная."
     ],
     playwright: [
-      "<term>Playwright</term> - waits for elements by itself. It has a built-in test runner and one API for <term>Chromium</term>, <term>Firefox</term> and <term>WebKit</term>. That is the one I chose.",
-      "<term>Playwright</term> - сам ждет появления элементов. У него есть встроенный тест-раннер и один API для <term>Chromium</term>, <term>Firefox</term> и <term>WebKit</term>. Его я и выбрал."
+      "<term>Playwright</term> - waits for elements by itself. It has a built-in test runner and one API for <term>Chromium</term>, <term>Firefox</term> and <term>WebKit</term>. That is the one I chose. The whole functionality of the application is covered by <term>E2E</term> tests that run automatically after every commit to main.",
+      "<term>Playwright</term> - сам ждет появления элементов. У него есть встроенный тест-раннер и один API для <term>Chromium</term>, <term>Firefox</term> и <term>WebKit</term>. Его я и выбрал. Весь функционал приложения покрыт <term>E2E</term>-тестами, которые запускаются автоматически после каждого коммита в main."
     ]
   },
   lint: {
@@ -593,17 +590,13 @@ const m = translate({
       "My requirements for a linter - linting and formatting in one tool, flexible rule configuration. I considered the following options:",
       "Мои требования к линтеру - линтинг и форматирование в одном инструменте, гибкая настройка правил. Рассматривал следующие варианты:"
     ],
-    deno: [
-      "<term>Bun</term> (<term>bun lint</term> and <term>bun fmt</term>) - already used in the project. But it has far fewer rules.",
-      "<term>Bun</term> (<term>bun lint</term> и <term>bun fmt</term>) - уже используется в проекте. Но правил в нем намного меньше."
-    ],
     eslint: [
       "<term>ESLint</term> - needs plugins for <term>TypeScript</term> and <term>React</term>, and formatting needs a separate <term>Prettier</term>. That makes two tools instead of one.",
       "<term>ESLint</term> - для <term>TypeScript</term> и <term>React</term> ему нужны плагины, а для форматирования нужен отдельный <term>Prettier</term>. Получается два инструмента вместо одного."
     ],
     biome: [
-      "<term>Biome</term> - a linter and formatter in one tool, with one config and no plugins. It is written in <term>Rust</term>. It is many times faster. In the end I took <term>Biome</term>.",
-      "<term>Biome</term> - линтер и форматтер в одном инструменте, с одним конфигом и без плагинов. Он написан на <term>Rust</term>. Работает в разы быстрее. В итоге взял <term>Biome</term>."
+      "<term>Biome</term> - a linter and formatter in one tool, with one config and no plugins. It is written in <term>Rust</term>. It is many times faster. In the end I took <term>Biome</term>. Linting and formatting run automatically in the repository on every commit.",
+      "<term>Biome</term> - линтер и форматтер в одном инструменте, с одним конфигом и без плагинов. Он написан на <term>Rust</term>. Работает в разы быстрее. В итоге взял <term>Biome</term>. Линтинг и форматирование запускаются автоматически в репозитории при каждом коммите."
     ]
   },
   dates: {

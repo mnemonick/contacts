@@ -6,6 +6,7 @@ import Input from "#/components/Input.tsx";
 import Modal from "#/components/Modal.tsx";
 import Loader from "#/components/Loader.tsx";
 import colors from "#/utils/colors.ts";
+import useLayout from "#/hooks/useLayout.ts";
 import translate from "#/utils/translate.ts";
 import useGlobalStore from "#/stores/useGlobalStore.ts";
 import ErrorModal from "#/components/modals/ErrorModal.tsx";
@@ -18,6 +19,7 @@ interface Props {
 }
 
 export default function ({ onClose }: Props) {
+  const layout = useLayout();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [modal, setModal] = useState<"NONE" | "LOADER" | "USERNAME_TAKEN" | "UNEXPECTED">("NONE");
@@ -43,7 +45,7 @@ export default function ({ onClose }: Props) {
     borderBottom: `1px solid ${colors.border.medium}`,
     fontFamily: "Montserrat, sans-serif",
     fontWeight: 500,
-    fontSize: 20,
+    fontSize: layout.mobile ? 18 : 20,
     textAlign: "center",
     height: 60,
     lineHeight: "60px",
@@ -56,7 +58,7 @@ export default function ({ onClose }: Props) {
     width: "100%",
     height: 60,
     fontFamily: "Montserrat",
-    fontSize: "24px"
+    fontSize: layout.mobile ? 18 : 24
   };
 
   const $submit: CSSProperties = {
@@ -71,7 +73,7 @@ export default function ({ onClose }: Props) {
     justifyContent: "center",
     color: colors.text.error,
     fontFamily: "Montserrat",
-    fontSize: "16px",
+    fontSize: layout.mobile ? 14 : 16,
     textAlign: "center",
     padding: 20,
     borderBottomLeftRadius: 20,

@@ -265,7 +265,8 @@ export default function () {
       fontFamily: "Montserrat",
       alignItems: "center",
       cursor: "pointer",
-      fontSize: layout.mobile ? 14 : 16
+      fontSize: layout.mobile ? 14 : 16,
+      WebkitTapHighlightColor: "transparent"
     };
 
     return (

@@ -54,7 +54,8 @@ export default function () {
 			border: 1px solid ${colors.border.strong};
 			color: ${colors.term.text};
 			padding: 0 4px;
-			margin-bottom: 4px;
+			margin-bottom: 2px;
+			margin-bottom: 2px;
 		}
 
 		a {

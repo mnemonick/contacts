@@ -1,0 +1,6 @@
+.idea
+node_modules
+backend/diagnostics
+tests/test-results
+sender/public
+sender/.bun-cache

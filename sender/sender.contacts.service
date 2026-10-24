@@ -1,0 +1,12 @@
+[Unit]
+Description=sender.contacts
+After=network.target
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+ExecStart=/usr/local/bin/bun /root/contacts/sender/sender.ts
+WorkingDirectory=/root/contacts
+StandardOutput=append:/root/contacts/sender.log
+StandardError=append:/root/contacts/sender.log

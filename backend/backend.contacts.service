@@ -1,0 +1,12 @@
+[Unit]
+Description=backend.contacts
+After=network.target
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+ExecStart=/usr/local/bin/bun /root/contacts/backend/backend.ts
+WorkingDirectory=/root/contacts
+StandardOutput=append:/root/contacts/backend.log
+StandardError=append:/root/contacts/backend.log

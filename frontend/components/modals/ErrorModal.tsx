@@ -11,6 +11,7 @@ interface Props {
 
 export default function ({ onClose, children }: Props) {
   const layout = useLayout();
+
   const $heading: CSSProperties = {
     borderBottom: `1px solid ${colors.border.medium}`,
     fontFamily: "Montserrat, sans-serif",
@@ -20,8 +21,7 @@ export default function ({ onClose, children }: Props) {
     height: 60,
     lineHeight: "60px",
     width: "100%",
-    color: colors.text.error,
-    background: colors.error.background
+    color: colors.text.error
   };
 
   const $error: CSSProperties = {

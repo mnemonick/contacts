@@ -46,14 +46,11 @@ export default function () {
         );
         body = (await response.json()) as GetUserResponse;
       } catch {
-        // An aborted request (the route was left) is not a connection error.
         if (!controller.signal.aborted) setDisconnected(true);
         return;
       }
 
       if (body.error === null) return setUser(body.user);
-
-      // INTERNAL is a server failure; every other error means the stored credentials are no longer valid.
       if (body.error === "INTERNAL") return setDisconnected(true);
 
       logout();
@@ -82,7 +79,7 @@ export default function () {
   };
 
   const $toolbar: CSSProperties = {
-    maxWidth: 1200,
+    maxWidth: 1024,
     width: "100%",
     display: "flex",
     justifyContent: "space-between",

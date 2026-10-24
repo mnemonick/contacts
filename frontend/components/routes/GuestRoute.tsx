@@ -44,8 +44,7 @@ export default function () {
   };
 
   const $sections: CSSProperties = {
-    width: "100%",
-    maxWidth: 1024,
+    width: layout.width,
     position: "relative",
     left: layout.left,
     paddingBottom: layout.desktop ? 150 : 90
@@ -59,7 +58,7 @@ export default function () {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    borderBottom: `1px dashed ${colors.border.weak}`
+    borderBottom: `1px dashed ${colors.border.strong}`
   };
 
   const $section: CSSProperties = {
@@ -70,15 +69,16 @@ export default function () {
     borderRadius: 10,
     marginTop: layout.desktop ? 40 : 10,
     marginBottom: layout.desktop ? 40 : 10,
-    marginLeft: layout.desktop ? 0 : 10,
-    marginRight: layout.desktop ? 0 : 10,
     background: colors.section,
     lineHeight: "21px",
     fontFamily: "Montserrat"
   };
 
   const $paragraph: CSSProperties = {
-    margin: 20
+    marginTop: 20,
+    marginBottom: 20,
+    marginLeft: layout.desktop ? 20 : 10,
+    marginRight: layout.desktop ? 20 : 10
   };
 
   useEffect(() => {

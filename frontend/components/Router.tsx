@@ -28,7 +28,7 @@ export default function () {
 
   if (disconnected) content = <Disconnected />;
   if (error) content = <ErrorScreen />;
-  if (layout.width < WIDTH_MIN) content = <TooNarrow />;
+  if (layout.windowWidth < WIDTH_MIN) content = <TooNarrow />;
 
   return (
     <StrictMode>

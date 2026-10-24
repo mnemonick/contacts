@@ -82,7 +82,7 @@ export default function () {
   };
 
   const $toolbar: CSSProperties = {
-    maxWidth: 1024,
+    maxWidth: 1200,
     width: "100%",
     display: "flex",
     justifyContent: "space-between",
@@ -95,9 +95,8 @@ export default function () {
 
   const $content: CSSProperties = {
     position: "relative",
-    width: "100%",
+    width: layout.width,
     minHeight: "100%",
-    maxWidth: 1024,
     left: layout.left,
     borderLeft: `1px solid ${colors.border.strong}`,
     borderRight: `1px solid ${colors.border.strong}`

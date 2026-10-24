@@ -42,7 +42,6 @@ export default async function (c: Context) {
     contacts: []
   };
 
-  // LEFT JOIN returns one row with NULL contact fields for a user without contacts.
   for (const row of rows) {
     if (row.name === null) continue;
 

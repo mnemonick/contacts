@@ -18,7 +18,6 @@ export default async function (c: Context) {
   if (body.name.length < NAME_MIN) return c.json<CreateContactResponse>({ error: "NAME_INCORRECT" });
   if (!isEmail(body.email)) return c.json<CreateContactResponse>({ error: "EMAIL_INCORRECT" });
 
-  // Inserts only when the credentials match, so an empty result means wrong username or password.
   const [contact] = await sql<Contact[]>`
     INSERT INTO contacts (user_id, email, name, comment)
     SELECT id, ${body.email}, ${body.name}, ${body.comment}

@@ -18,7 +18,6 @@ export default async function (c: Context) {
   `;
   if (user === undefined) return c.json({ error: "INVALID_CREDENTIALS" });
 
-  // The user_id check prevents deleting another user's contact.
   const { count } = await sql`DELETE FROM contacts WHERE id = ${body.contactId} AND user_id = ${user.id}`;
   if (count === 0) return c.json({ error: "CONTACT_NOT_FOUND" });
 

@@ -26,7 +26,6 @@ export default async function (c: Context) {
   `;
   if (user === undefined) return c.json({ error: "INVALID_CREDENTIALS" });
 
-  // The user_id check prevents changing another user's contact.
   const [contact] = await sql<Contact[]>`
     UPDATE contacts
     SET name = ${body.name}, email = ${body.email}, comment = ${body.comment}

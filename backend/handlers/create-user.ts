@@ -28,7 +28,6 @@ export default async function (c: Context) {
       return c.json<CreateUserResponse>({ error: "USERNAME_TAKEN" });
     }
 
-    // Any other database error goes to app.onError.
     throw error;
   }
 }

@@ -184,7 +184,7 @@ export default function () {
         <toolbar style={$toolbar}>
           <username
             style={$username}
-            onMouseMove={(event) => (event.currentTarget.style.background = colors.hover)}
+            onMouseMove={(event) => (event.currentTarget.style.background = colors.link.hover)}
             onMouseLeave={(event) => (event.currentTarget.style.background = "transparent")}
             onClick={() => setModal("PROFILE")}
           >
@@ -193,7 +193,7 @@ export default function () {
           </username>
           <exit
             style={$exit}
-            onMouseMove={(event) => (event.currentTarget.style.background = colors.hover)}
+            onMouseMove={(event) => (event.currentTarget.style.background = colors.link.hover)}
             onMouseLeave={(event) => (event.currentTarget.style.background = "transparent")}
             onClick={logout}
           >

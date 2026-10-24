@@ -1,11 +1,10 @@
 export default {
-  main: "oklch(19.86% 0.029 251.05)",
-  hover: "oklch(40.51% 0.034 256.83 / 0.15)",
-  code: "oklch(48.72% 0.165 263.46 / 0.29)",
-  section: "oklch(15.69% 0.02 254.69)",
-  gradient: "radial-gradient(circle 2000px, oklch(61.41% 0.211 256.22 / 0.06) 0%, oklch(0% 0 0) 100%)",
+  main: "oklch(20% 0.030 250)",
+  code: "oklch(50% 0.165 265 / 0.30)",
+  section: "oklch(15% 0.02 255)",
+  gradient: "radial-gradient(circle 2000px, oklch(60% 0.200 255 / 0.06) 0%, oklch(0% 0 0) 100%)",
   fade: {
-    start: "oklch(0% 0 0 / 0)",
+    start: "oklch(0% 0 0)",
     end: "oklch(0% 0 0)"
   },
   electron: {
@@ -23,20 +22,20 @@ export default {
     sector: "oklch(100% 0 0 / 0.08)"
   },
   text: {
-    weak: "oklch(40.51% 0.034 256.83)",
+    weak: "oklch(40.50% 0.035 255)",
     medium: "oklch(100% 0 0 / 0.75)",
     strong: "oklch(100% 0 0)",
-    error: "oklch(63.33% 0.2 24.93)"
+    error: "oklch(60% 0.2 25)"
   },
   border: {
-    weak: "oklch(40.51% 0.034 256.83 / 0.6)",
-    medium: "oklch(40.51% 0.034 256.83 / 0.3)",
-    strong: "oklch(40.51% 0.034 256.83 / 0.5)"
+    weak: "oklch(40% 0.035 255 / 0.2)",
+    medium: "oklch(40% 0.035 255 / 0.3)",
+    strong: "oklch(40% 0.035 255 / 0.5)"
   },
   button: {
-    color: "oklch(61.41% 0.211 256.22)",
+    color: "oklch(60% 0.2 255)",
     shadow: "0 0 0 5px oklch(0% 0 0 / 0.4)",
-    hover: "oklch(52.2% 0.177 255.83)"
+    hover: "oklch(0 0 0 / 0.20)"
   },
   tooltip: {
     background: "oklch(0% 0 0)",
@@ -51,8 +50,9 @@ export default {
     background: "transparent"
   },
   link: {
-    text: "oklch(67.15% 0.168 255.48)",
-    underscore: "oklch(100% 0 0 / 0.15)"
+    text: "oklch(67% 0.168 255)",
+    underscore: "oklch(100% 0 0 / 0.15)",
+    hover: "oklch(40% 0.035 255 / 0.15)"
   },
   modal: {
     content: "oklch(17% 0.015 250)",

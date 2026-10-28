@@ -35,8 +35,6 @@ The business logic is intentionally simple: users register and keep a list of co
 git clone https://github.com/mnemonick/contacts.git
 ```
 
-All commands below run from the project root, the `contacts` folder that `git clone` creates.
-
 ### 2. Install dependencies
 
 ```bash

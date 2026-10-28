@@ -2,16 +2,16 @@
 
 The project is available at **[contacts.koshelko.com](https://contacts.koshelko.com)**.
 
-This is a demonstration of how I write code: architecture, frontend, backend, tests and deployment. The project was written by hand; neural networks were used only while learning.
+This is a demonstration of how I write code: architecture, frontend, backend, tests and deployment. The project was written by hand, neural networks were used only while learning.
 
 The business logic is intentionally simple: users register and keep a list of contacts (create, edit, delete). The main criterion for choosing technologies is simplicity and minimalism.
 
 ## Stack
 
-- **Frontend:** `TypeScript`, `React 19`, `Vite`, `wouter`, `zustand`. Styles are inline styles plus one global `Styles` component.
-- **Backend:** `Bun`, `Hono`, `PostgreSQL`. Migrations are applied with `postgres-shift`. The client uses the backend types via `hono/client`.
+- **Frontend:** `TypeScript`, `React 19`, `Vite`, `wouter`, `zustand`.
+- **Backend:** `Bun`, `Hono`, `PostgreSQL`. Migrations are applied with `postgres-shift`. 
 - **Sender:** static file server on `Bun` + `Hono` with CSP and caching.
-- **Tests:** `Playwright`, E2E only: tests act like a user and check what is visible on the page.
+- **Tests:** `Playwright`.
 - **Quality:** `Biome` for linting, `tsc` for types.
 - **CI/CD:** `GitHub Actions`. Build, lint, types, E2E tests and deployment over SSH.
 

@@ -33,8 +33,9 @@ The business logic is intentionally simple: users register and keep a list of co
 
 ```bash
 git clone https://github.com/mnemonick/contacts.git
-cd contacts
 ```
+
+All commands below run from the project root, the `contacts` folder that `git clone` creates.
 
 ### 2. Install dependencies
 
@@ -55,7 +56,7 @@ createdb -U postgres main
 In the first terminal:
 
 ```bash
-cd frontend && bunx vite build --mode=development --watch
+bunx vite build frontend --mode=development --watch
 ```
 
 `Vite` rebuilds the project on every file change. The output goes to `sender/public`. The command keeps running until you stop it with Ctrl+C.
@@ -63,7 +64,7 @@ cd frontend && bunx vite build --mode=development --watch
 For a production build, run this once:
 
 ```bash
-cd frontend && bunx vite build --mode=production
+bunx vite build frontend --mode=production
 ```
 
 ### 5. Start the backend in development mode (port 5001)
@@ -93,9 +94,8 @@ Open [http://localhost:5000](http://localhost:5000). The frontend calls the back
 Requires the running backend and sender from steps 5 and 6.
 
 ```bash
-cd tests
 bunx playwright install chromium
-bunx playwright test
+bunx playwright test --config tests/playwright.config.ts
 ```
 
 Tests create data in the same `main` database.
@@ -103,8 +103,8 @@ Tests create data in the same `main` database.
 ## Code checks
 
 ```bash
-cd frontend && bunx tsc && bunx biome check
-cd backend && bunx tsc && bunx biome check
+bunx tsc -p frontend && bunx biome check frontend
+bunx tsc -p backend && bunx biome check backend
 ```
 
 ## Deployment

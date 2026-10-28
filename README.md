@@ -22,26 +22,26 @@ The business logic is intentionally simple: users register and keep a list of co
 - `sender/` - static file server. The frontend is built into it.
 - `tests/` - `Playwright` E2E tests in `specs/`.
 
-## Running locally
+## Development
 
 ### Requirements
 
 - `Bun`, version 1.4.3
 - `PostgreSQL` 18 on `localhost:5432`
 
-### 1. Clone the project
+### Clone the project
 
 ```bash
 git clone https://github.com/mnemonick/contacts.git
 ```
 
-### 2. Install dependencies
+### Install dependencies
 
 ```bash
 bun install
 ```
 
-### 3. Create the database
+### Create the database
 
 The backend connects to the `main` database on `localhost:5432` as the `postgres` user without a password.
 
@@ -49,25 +49,41 @@ The backend connects to the `main` database on `localhost:5432` as the `postgres
 createdb -U postgres main
 ```
 
-### 4. Start the frontend in development mode
+### Install the Playwright browser
 
-In the first terminal:
+```bash
+bunx playwright install chromium
+```
+
+### Run the E2E tests
+
+Requires the backend and the sender running in development mode (commands 1 and 3 below).
+
+```bash
+bunx playwright test --config tests/playwright.config.ts
+```
+
+Tests create data in the same `main` database.
+
+## Commands
+
+Run all commands from the project root. Commands 1 to 3 keep running, so start each one in its own terminal.
+
+### 1. Run the sender in development mode (port 5000)
+
+```bash
+bun --watch sender/sender.ts
+```
+
+### 2. Run the frontend in development mode
 
 ```bash
 bunx vite build frontend --mode=development --watch
 ```
 
-`Vite` rebuilds the project on every file change. The output goes to `sender/public`. The command keeps running until you stop it with Ctrl+C.
+`Vite` rebuilds the frontend on every file change. The output goes to `sender/public`.
 
-For a production build, run this once:
-
-```bash
-bunx vite build frontend --mode=production
-```
-
-### 5. Start the backend in development mode (port 5001)
-
-In the second terminal:
+### 3. Run the backend in development mode (port 5001)
 
 ```bash
 bun --watch backend/backend.ts
@@ -75,36 +91,40 @@ bun --watch backend/backend.ts
 
 Migrations are applied automatically on start.
 
-### 6. Start the sender in development mode (port 5000)
-
-In the third terminal:
-
-```bash
-bun --watch sender/sender.ts
-```
-
-### 7. Open the project
-
 Open [http://localhost:5000](http://localhost:5000). The frontend calls the backend on port 5001 of the same host automatically.
 
-## Tests
-
-Requires the running backend and sender from steps 5 and 6.
+### 4. Run the sender in production
 
 ```bash
-bunx playwright install chromium
-bunx playwright test --config tests/playwright.config.ts
+bun sender/sender.ts
 ```
 
-Tests create data in the same `main` database.
+The server runs this command as the `sender.contacts` systemd service (`sender/sender.contacts.service`). The sender serves the frontend from `sender/public`.
 
-## Code checks
+### 5. Build the frontend for production
 
 ```bash
-bunx tsc -p frontend && bunx biome check frontend
-bunx tsc -p backend && bunx biome check backend
+bunx vite build frontend --mode=production
 ```
 
-## Deployment
+### 6. Run the backend in production
 
-`GitHub Actions` checks the project, runs the E2E tests and deploys it to the server over SSH. Settings are in `.github/workflows/workflow.yml`.
+```bash
+bun backend/backend.ts
+```
+
+The server runs this command as the `backend.contacts` systemd service (`backend/backend.contacts.service`). On Linux without the `CI` variable, the backend reads Let's Encrypt certificates for `koshelko.com`, so run it in production only on the server.
+
+### 7. Type checks
+
+```bash
+bunx tsc -p frontend
+bunx tsc -p backend
+```
+
+### 8. Linting
+
+```bash
+bunx biome check frontend
+bunx biome check backend
+```
